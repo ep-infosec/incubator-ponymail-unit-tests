@@ -1,0 +1,101 @@
+args:
+  env:
+    MOCK_AAT: '0'
+generators:
+  corpus/maven_duplicates_2017_mboxvm.mbox: null
+  corpus/maven_duplicates_2017_mailarchivesao.mbox: null
+  corpus/maven_duplicates_2017_listsao_1.mbox: null
+  corpus/maven_duplicates_2017_listsao_2.mbox:
+    cluster:
+    - index: 0
+      message-id: <150900360646.1628.1174937787253115811.gitbox@gitbox.apache.org>
+      generated: r6b926a05fe41e4945b8ea111b7972da24d43fec3f2585c253de05852@<dev.maven.apache.org>
+    - index: 1
+      message-id: <150900360664.1639.5869177521340218489.gitbox@gitbox.apache.org>
+      generated: rb86ca3173cff6cfa8e822d6cece928adccab96a7100daa1d9785e63c@<dev.maven.apache.org>
+    - index: 2
+      message-id: <150900360659.1632.749801523714658816.gitbox@gitbox.apache.org>
+      generated: r806fee0f67e68802a0aa7985bfc5c3f4b861dcc63476b85119449208@<dev.maven.apache.org>
+    - index: 3
+      message-id: <150900370255.2261.4482031841526989336.gitbox@gitbox.apache.org>
+      generated: r3024faffa184172cd13673ef50d24da7939c8ec70b8e73e919f4d7da@<dev.maven.apache.org>
+    - index: 4
+      message-id: <150900370283.2267.15668741730198687238.gitbox@gitbox.apache.org>
+      generated: r54d251d198a68c95a685a00e54b96d15ee51d08b97419cd5bbbed71c@<dev.maven.apache.org>
+    - index: 5
+      message-id: <150907161747.17428.6915601202360371460.gitbox@gitbox.apache.org>
+      generated: r6b5a61dd092797b6942054879914f579630f036a9873e94ee3492b26@<dev.maven.apache.org>
+    - index: 6
+      message-id: <150980598660.9752.3932007543681134404.gitbox@gitbox.apache.org>
+      generated: r6d9bcb35c7bcf13efa3a5c66d97964e11c31a1f2601fbd9f0037102a@<dev.maven.apache.org>
+    - index: 7
+      message-id: <150980649445.13005.1437023697550694082.gitbox@gitbox.apache.org>
+      generated: r61223196fbf0682a40fa7c1cc937156a404acca58bb335e5d7d0d40f@<dev.maven.apache.org>
+    - index: 8
+      message-id: <2567878.8ANxGostfX@giga>
+      generated: ra11f879fc3cd71aaf44543fa7d0a7ca25f6609b2f8f8fb075b2b19ff@<dev.maven.apache.org>
+    - index: 9
+      message-id: <151238757459.14520.7532165007668224803.gitbox@gitbox.apache.org>
+      generated: ra204ba60c1acc0a7a5fe4d87265f141b6dab823dad2eed3c75a66170@<dev.maven.apache.org>
+    medium:
+    - index: 0
+      message-id: <150900360646.1628.1174937787253115811.gitbox@gitbox.apache.org>
+      generated: 37e1ac9eacdbc1f8ac445665be687d4aa434d533b372f9d6f017c0e0@<dev.maven.apache.org>
+    - index: 1
+      message-id: <150900360664.1639.5869177521340218489.gitbox@gitbox.apache.org>
+      generated: a46b94e671bb3160db744941de41e39fcaeeae19a1e11fce63bb16c0@<dev.maven.apache.org>
+    - index: 2
+      message-id: <150900360659.1632.749801523714658816.gitbox@gitbox.apache.org>
+      generated: f0caabc4d906e93e79b4b71d640ccb611e9eb30ac41e5571c751c1c9@<dev.maven.apache.org>
+    - index: 3
+      message-id: <150900370255.2261.4482031841526989336.gitbox@gitbox.apache.org>
+      generated: 6a30a67d75e7beb405d48f4a8da5ff5d0ce94733f9f8c905a0fa1a06@<dev.maven.apache.org>
+    - index: 4
+      message-id: <150900370283.2267.15668741730198687238.gitbox@gitbox.apache.org>
+      generated: 5baea34629b362bf827382e7cf2339d4aa6e692b64f86d47b6fc60ed@<dev.maven.apache.org>
+    - index: 5
+      message-id: <150907161747.17428.6915601202360371460.gitbox@gitbox.apache.org>
+      generated: b3b6942c10bf382c6112b01f26ee793af6deca0ce3c86c75a4a4cd8f@<dev.maven.apache.org>
+    - index: 6
+      message-id: <150980598660.9752.3932007543681134404.gitbox@gitbox.apache.org>
+      generated: 537115d45c99e7e8e724236b5d5b3638465bbaafd4b813351fdec122@<dev.maven.apache.org>
+    - index: 7
+      message-id: <150980649445.13005.1437023697550694082.gitbox@gitbox.apache.org>
+      generated: d0bd0d9cd5698eea59dd9349fd5ba32386a7e22db65f190458f9800b@<dev.maven.apache.org>
+    - index: 8
+      message-id: <2567878.8ANxGostfX@giga>
+      generated: 0d353ab32b0450743c2a19990c89be333ce55e0d449755984d51634b@<dev.maven.apache.org>
+    - index: 9
+      message-id: <151238757459.14520.7532165007668224803.gitbox@gitbox.apache.org>
+      generated: cdf59fdea0b7b4d61aa7c0c4159bc48a853c3b3a48d17b2e662cae29@<dev.maven.apache.org>
+    dkim:
+    - index: 0
+      message-id: <150900360646.1628.1174937787253115811.gitbox@gitbox.apache.org>
+      generated: oslr209mxstc11zllddob09vkf8yqh7d
+    - index: 1
+      message-id: <150900360664.1639.5869177521340218489.gitbox@gitbox.apache.org>
+      generated: oxoldwy4npmrm1lovy0h4ch3k1m3zs3j
+    - index: 2
+      message-id: <150900360659.1632.749801523714658816.gitbox@gitbox.apache.org>
+      generated: d0jlqnm0p8z90sy3nrwhxb6cctqlc7j5
+    - index: 3
+      message-id: <150900370255.2261.4482031841526989336.gitbox@gitbox.apache.org>
+      generated: lwyd10955bvzowtk2gj7csh7k2j1fmp2
+    - index: 4
+      message-id: <150900370283.2267.15668741730198687238.gitbox@gitbox.apache.org>
+      generated: y0v97kcx40d94yxfgoyglrjkx33pqpy3
+    - index: 5
+      message-id: <150907161747.17428.6915601202360371460.gitbox@gitbox.apache.org>
+      generated: j7j9h5nksp7lskyz5vcnjk0vnpybnymk
+    - index: 6
+      message-id: <150980598660.9752.3932007543681134404.gitbox@gitbox.apache.org>
+      generated: 3gn3l9fypk7khoy0zynypjjbjjlb8zht
+    - index: 7
+      message-id: <150980649445.13005.1437023697550694082.gitbox@gitbox.apache.org>
+      generated: 1dxws7ltwv5j0brosb84b5prw9rz0drp
+    - index: 8
+      message-id: <2567878.8ANxGostfX@giga>
+      generated: jocqvp423dmx70rhg6scv7jsxc0zwcfd
+    - index: 9
+      message-id: <151238757459.14520.7532165007668224803.gitbox@gitbox.apache.org>
+      generated: 82o6qj6122yjrg6fj0mx3r7vjkkq22pc

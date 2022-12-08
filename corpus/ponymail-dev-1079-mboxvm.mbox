@@ -1,0 +1,70 @@
+From dev-return-1079-archiver=mbox-vm.apache.org@ponymail.incubator.apache.org  Fri Mar 13 04:57:25 2020
+Return-Path: <dev-return-1079-archiver=mbox-vm.apache.org@ponymail.incubator.apache.org>
+X-Original-To: archiver@mbox-vm.apache.org
+Delivered-To: archiver@mbox-vm.apache.org
+Received: from mail.apache.org (unknown [10.10.3.159])
+	by mbox-vm.apache.org (ASF Mail Server at mbox-vm.apache.org) with SMTP id A94641807
+	for <archiver@mbox-vm.apache.org>; Fri, 13 Mar 2020 04:57:25 +0000 (UTC)
+Received: (qmail 10881 invoked by uid 500); 13 Mar 2020 04:57:25 -0000
+Mailing-List: contact dev-help@ponymail.incubator.apache.org; run by ezmlm
+Precedence: bulk
+List-Help: <mailto:dev-help@ponymail.incubator.apache.org>
+List-Unsubscribe: <mailto:dev-unsubscribe@ponymail.incubator.apache.org>
+List-Post: <mailto:dev@ponymail.incubator.apache.org>
+List-Id: <dev.ponymail.incubator.apache.org>
+Reply-To: dev@ponymail.incubator.apache.org
+Delivered-To: mailing list dev@ponymail.incubator.apache.org
+Received: (qmail 10866 invoked by uid 99); 13 Mar 2020 04:57:25 -0000
+Received: from Unknown (HELO mailrelay1-lw-us.apache.org) (10.10.3.159)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 13 Mar 2020 04:57:25 +0000
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
+	by mailrelay1-lw-us.apache.org (ASF Mail Server at mailrelay1-lw-us.apache.org) with ESMTPSA id F38152233
+	for <dev@ponymail.apache.org>; Fri, 13 Mar 2020 04:57:24 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id c145so10478218qke.12
+        for <dev@ponymail.apache.org>; Thu, 12 Mar 2020 21:57:24 -0700 (PDT)
+X-Gm-Message-State: ANhLgQ0F210hBrQLWhVgLa/ukBdQ3R0qJxIaGLr4vSEbJAIdXzQj83Kp
+	0iwMJjY/E9rtZ3P4M86Cl50FNZOF+CeNHx8jCA==
+X-Google-Smtp-Source: ADFU+vuHcC+wXv/EdV1wky2aXp/bRQ01Gzm872mMa7hXsix8P9J0JcMAzbWxv8nYcbhrcSpPXs2JB67NdHWYGJKt3o4=
+X-Received: by 2002:a25:a28f:: with SMTP id c15mr5011550ybi.228.1584075444479;
+ Thu, 12 Mar 2020 21:57:24 -0700 (PDT)
+MIME-Version: 1.0
+References: <814a814c-ab08-8375-02e6-4046980ef493@apache.org>
+In-Reply-To: <814a814c-ab08-8375-02e6-4046980ef493@apache.org>
+From: Swapnil M Mane <swapnilmmane@apache.org>
+Date: Fri, 13 Mar 2020 10:26:48 +0530
+X-Gmail-Original-Message-ID: <CAOwvvydHMY2oa8t4m+UWi8N4o+3JgdqSxujqRueP+OoiNW1EQg@mail.gmail.com>
+Message-ID: <CAOwvvydHMY2oa8t4m+UWi8N4o+3JgdqSxujqRueP+OoiNW1EQg@mail.gmail.com>
+Subject: Re: Graduation or..?
+To: dev@ponymail.incubator.apache.org
+Cc: dev@ponymail.apache.org
+Content-Type: text/plain; charset="UTF-8"
+
++1 to looks towards graduating to TLP.
+My experience with Pony mail is also very good and it seems we are
+good for graduation.
+
+
+Best regards,
+Swapnil M Mane,
+www.apache.org
+
+On Fri, Mar 13, 2020 at 4:02 AM Daniel Gruno <humbedooh@apache.org> wrote:
+>
+> Hi folks,
+> I've been asked a few times about this, and so I'm turning to the
+> community for some feedback, maybe start a vote or I dunno.
+>
+> I am satisfied that the community around Pony Mail knows their way
+> around the ASF, and that we do not have outstanding issues with learning
+> how to conduct ourselves - that is to say, the incubator cannot teach us
+> more, and so we should look towards either graduating to TLP or leaving
+> the foundation. I'm in favor of the former, but I'd like to hear what
+> other people have to say. Even a +1 to graduating would be appreciated.
+>
+> If we do move towards graduation, I'd also like for the respective PPMC
+> members to state whether they are still active and want a role in the
+> PMC, so we can draft a graduation proposal for the incubator and the board.
+>
+> With regards,
+> Daniel.
+

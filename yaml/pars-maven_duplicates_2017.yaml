@@ -1,0 +1,47 @@
+args:
+  parse_html: false
+parsing:
+  corpus/maven_duplicates_2017_mboxvm.mbox:
+  corpus/maven_duplicates_2017_mailarchivesao.mbox:
+  corpus/maven_duplicates_2017_listsao_1.mbox:
+  corpus/maven_duplicates_2017_listsao_2.mbox:
+  - index: 0
+    message-id: <150900360646.1628.1174937787253115811.gitbox@gitbox.apache.org>
+    body_sha3_256: 35ab1447f47949c944253a2f58fdae1aeb40963e70042114cbfbafd248de8b5c
+    attachments: []
+  - index: 1
+    message-id: <150900360664.1639.5869177521340218489.gitbox@gitbox.apache.org>
+    body_sha3_256: 980b08eb0dbf2abcbfcfb0e71a7f63728f97fe97826abc3039bd98355f27b6b6
+    attachments: []
+  - index: 2
+    message-id: <150900360659.1632.749801523714658816.gitbox@gitbox.apache.org>
+    body_sha3_256: 7b47b467b85ae04a7bfcfc385c831dd9b16280d1b45dba7b60095f2590f9eae2
+    attachments: []
+  - index: 3
+    message-id: <150900370255.2261.4482031841526989336.gitbox@gitbox.apache.org>
+    body_sha3_256: e229a172c716f5bc283eaa48ac22c16f16ffe2ede0240368f7f43239b707ec4f
+    attachments: []
+  - index: 4
+    message-id: <150900370283.2267.15668741730198687238.gitbox@gitbox.apache.org>
+    body_sha3_256: 7a326786c7284cbf9641bc04d93748870c3341ff1d821272f957d0ede89862ec
+    attachments: []
+  - index: 5
+    message-id: <150907161747.17428.6915601202360371460.gitbox@gitbox.apache.org>
+    body_sha3_256: d31432c06b605f8f76d4cfc70a6a68a42f1301a5aba32b13c3a7bcbc34b72fb2
+    attachments: []
+  - index: 6
+    message-id: <150980598660.9752.3932007543681134404.gitbox@gitbox.apache.org>
+    body_sha3_256: 356e84053af0a5d2a7622c87745ea0cae5511c63bb802d3f1e77923c7155cdd1
+    attachments: []
+  - index: 7
+    message-id: <150980649445.13005.1437023697550694082.gitbox@gitbox.apache.org>
+    body_sha3_256: 86feb9dd02fea5337da1be2bb7611babc806e7933d2c128d9cc44ab375ee502f
+    attachments: []
+  - index: 8
+    message-id: <2567878.8ANxGostfX@giga>
+    body_sha3_256: 58b63e42fd350b09d927a26977607e31c35bb3616b110d25eba678f1143ef123
+    attachments: []
+  - index: 9
+    message-id: <151238757459.14520.7532165007668224803.gitbox@gitbox.apache.org>
+    body_sha3_256: 9c942f0cf01914029d8348cd3015bf38e50017d5846c089befbda9c7534558f7
+    attachments: []

@@ -1,0 +1,49 @@
+From dev-return-28428-apmail-httpd-dev-archive=httpd.apache.org@httpd.apache.org Tue Apr 09 14:46:49 2002
+Return-Path: <dev-return-28428-apmail-httpd-dev-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-dev-archive@httpd.apache.org
+Received: (qmail 30875 invoked by uid 500); 9 Apr 2002 14:46:47 -0000
+Mailing-List: contact dev-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: dev@httpd.apache.org
+list-help: <mailto:dev-help@httpd.apache.org>
+list-unsubscribe: <mailto:dev-unsubscribe@httpd.apache.org>
+list-post: <mailto:dev@httpd.apache.org>
+Delivered-To: mailing list dev@httpd.apache.org
+Received: (qmail 30849 invoked from network); 9 Apr 2002 14:46:46 -0000
+Message-ID: <007801c1dfd5$68f32d80$0f01a8c0@kaluga>
+From: "Nick De Decker" <nick@i-vision.be>
+To: <users@httpd.apache.org>
+Cc: <dev@httpd.apache.org>
+Subject: slow apache 2.0
+Date: Tue, 9 Apr 2002 16:47:02 +0200
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2600.0000
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+X-Spam-Rating: daedalus.apache.org 1.6.2 0/1000/N
+
+Hello,
+
+I'm testing apache 2.0 but i'm having trouble with it.
+Benchmarks show very slow results when the number of concurrent users get
+high.
+i tested the prefork/worker settings but nothing seems to help.
+tested with ab :
+ab -n 10000 -c 1000 http://192.168.1.253/index.html (978 bytes page)
+
+apache 1.3.24 => 1036 requests per second, response times of 110 ms
+apache 2.0.35 => 68 requests per second, average response time of 15000 ms.
+
+So why did the make apache 2.0 so slow ?  3 years of work for a server
+that's  100 slower ?
+
+Help me out please,
+
+Nick De Decker
+
+
+

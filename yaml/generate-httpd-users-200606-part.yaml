@@ -1,0 +1,192 @@
+# The "v0.10" values in here are where pony mail and foal differ due to different
+# handling of format=flowed.
+args:
+  cmd: tests/test-generators.py --generate generate-httpd-users-200606-part.yaml --mbox corpus/httpd-users-200606-part.mbox
+    --rootdir ../ponymail/
+generators:
+  corpus/httpd-users-200606-part.mbox:
+    cluster:
+    - index: 0
+      message-id: <BAY103-F28070ECF509B48E8F10ECEC2910@phx.gbl>
+      generated: re2dac36fb1b6c6a1a4ace8a29e33e992918b94d46c577eece7915339@<users.httpd.apache.org>
+      v0.10: rf5679a9dd6d693a51743647d6067446ffe36465e4a1f3a8bb618659c@<users.httpd.apache.org>
+    - index: 1
+      message-id: <BAY117-F8A51AB1A746DB7C5C868BB4910@phx.gbl>
+      generated: r45843706ca2f9e411a5ca05c13c570877d28b71d519d6272bda55c56@<users.httpd.apache.org>
+      v0.10: re5974b81d8e9c97c07bfe66f95e3e3c050e512c7fe3d52cf4242e908@<users.httpd.apache.org>
+    - index: 2
+      message-id: <BAY103-F36A0C2427095C72D377474C2940@phx.gbl>
+      generated: rf6c2abe5470256cbdc0d1f5e02ed5a4a11b48d956da4a3f6779287a4@<users.httpd.apache.org>
+      v0.10: radee22ee82b366171790f614775e8410132c992a28826f604437b5b9@<users.httpd.apache.org>
+    - index: 3
+      message-id: <BAY103-F115CA57A21C2C56030731CE2950@phx.gbl>
+      generated: r5eac8b0c8a54de1824ddbde66551f26c95bdeb81b5a77943ee1741d5@<users.httpd.apache.org>
+      v0.10: re146eb3affc962622333bc69f3ca730429708f90eec24db87d0587a9@<users.httpd.apache.org>
+    - index: 4
+      message-id: <BAY103-F11410841CDE610A1EFC53E2950@phx.gbl>
+      generated: r3d7edfc385133def2a060b11138812feeac594992e1a48d97a65201a@<users.httpd.apache.org>
+      v0.10: r3a605d8614bc73d007e153880a562c2805ee0add67848d4fa1575e06@<users.httpd.apache.org>
+    - index: 5
+      message-id: <BAY103-F381B373856C3F8BAEF7649E2950@phx.gbl>
+      generated: r048d25dc4399fabcbbd45d8131ee0fe42e65eeb792ff741609572862@<users.httpd.apache.org>
+      v0.10: rd373c738b0fd9f7e1ba40afc9eb83d9236eacd30d9fae232571cacfb@<users.httpd.apache.org>
+    - index: 6
+      message-id: <BAY103-F9B586FFD1CFE6D9112763E2950@phx.gbl>
+      generated: rf8abedc89af20b537262d4979521be5528cb36cfcca735a4d2421b20@<users.httpd.apache.org>
+      v0.10: re308560032d36d8f4f99e655ed770538c25792d4786a3b007722ee0a@<users.httpd.apache.org>
+    - index: 7
+      message-id: <BAY103-F802BFA93952CB192373C4E2950@phx.gbl>
+      generated: r0e7d05d267fe52a56c1b32d4f2376591113e663dd5da312f4b6fd9d6@<users.httpd.apache.org>
+      v0.10: rfb0b8285894b14306b1d03373895e5b6a7657ddce3608ec2d078d7f5@<users.httpd.apache.org>
+    - index: 8
+      message-id: <BAY103-F40D7A4EF5AC184C9769209E2950@phx.gbl>
+      generated: r898bf7396a152718bd24f4d0ef814c0845a3237ec242c19f84bb4795@<users.httpd.apache.org>
+      v0.10: rd5783897ef3b552a4c6cca7e2f8212cd5e5233cec26ae1948c7ffe52@<users.httpd.apache.org>
+    - index: 9
+      message-id: <BAY103-F1C665A56AE3A65074D38DE2950@phx.gbl>
+      generated: r2ec8ede8a999d4745065d8239ffd7bffea28e5c98c1ff29522c98087@<users.httpd.apache.org>
+      v0.10: r7a8f9cc529dd7e2b7dd4af949ee284fa656d58b2f6a703b72eb8f26e@<users.httpd.apache.org>
+    - index: 10
+      message-id: <BAY103-F192188E821DBDA96D8C790C27E0@phx.gbl>
+      generated: rd59592d38837af0c5e0cd2a9366a7c59be77be79f521ea97dc1a550d@<users.httpd.apache.org>
+      v0.10: r6bd7aa7c787130188f3a6a76a19ba4e8e132ae15923e663a5e1b7614@<users.httpd.apache.org>
+    - index: 11
+      message-id: <BAY103-F40786C94EB9152F563E277ED720@phx.gbl>
+      generated: r5e24e66647412055bd06e28e80e2eb40feaa40374c44d6b9cb8b9e91@<users.httpd.apache.org>
+      v0.10: r41283b1d1ffe65918778052d3c724608c724abf93b0746b654652bda@<users.httpd.apache.org>
+    full:
+    - index: 0
+      message-id: <BAY103-F28070ECF509B48E8F10ECEC2910@phx.gbl>
+      generated: 68bd8b3c93863a35d4214d4e7a9cd27408775cc6930d60ab092e8e49@<users.httpd.apache.org>
+    - index: 1
+      message-id: <BAY117-F8A51AB1A746DB7C5C868BB4910@phx.gbl>
+      generated: 381ad96ea013290e33b032228567e341262b064e9726f71b10b45e9d@<users.httpd.apache.org>
+    - index: 2
+      message-id: <BAY103-F36A0C2427095C72D377474C2940@phx.gbl>
+      generated: f99cf8b23dd6c99a7baf7a29cafb40cdbbf967893e4e3c08d7346300@<users.httpd.apache.org>
+    - index: 3
+      message-id: <BAY103-F115CA57A21C2C56030731CE2950@phx.gbl>
+      generated: 7e1085a96d9693be9e1f8993a023c0330042d408fc1290031a5af651@<users.httpd.apache.org>
+    - index: 4
+      message-id: <BAY103-F11410841CDE610A1EFC53E2950@phx.gbl>
+      generated: 1554bad8d9d34039443a407f6a194b7595f3843b073d48cf363f9597@<users.httpd.apache.org>
+    - index: 5
+      message-id: <BAY103-F381B373856C3F8BAEF7649E2950@phx.gbl>
+      generated: 7132e4879297557823cee4b20c594288ca210f1876779c46a9ba8bc1@<users.httpd.apache.org>
+    - index: 6
+      message-id: <BAY103-F9B586FFD1CFE6D9112763E2950@phx.gbl>
+      generated: d679857fa8f05412ea2dbd1f2211b66f430e4b5e1a35eedbf3d96248@<users.httpd.apache.org>
+    - index: 7
+      message-id: <BAY103-F802BFA93952CB192373C4E2950@phx.gbl>
+      generated: 4bb479c859faf8634c9bc4f95fa4f168696192ebd36d9af9fb6e4feb@<users.httpd.apache.org>
+    - index: 8
+      message-id: <BAY103-F40D7A4EF5AC184C9769209E2950@phx.gbl>
+      generated: 14fa9b0385ffff9bbdfe3bd988a6c83650be94df20930b4dbe800d26@<users.httpd.apache.org>
+    - index: 9
+      message-id: <BAY103-F1C665A56AE3A65074D38DE2950@phx.gbl>
+      generated: 357b958c1544a72951bef52fec26cb61ea4978e3331ec271d11e4649@<users.httpd.apache.org>
+    - index: 10
+      message-id: <BAY103-F192188E821DBDA96D8C790C27E0@phx.gbl>
+      generated: 95d1aba805a420cf98efe0946eb06b44c52c53659fb553f5fdfe26c9@<users.httpd.apache.org>
+    - index: 11
+      message-id: <BAY103-F40786C94EB9152F563E277ED720@phx.gbl>
+      generated: 0b33ecfbf00d0162a2a98fb62479a5a10c8bdb5d0fed5b3012fcf73a@<users.httpd.apache.org>
+    legacy:
+    - index: 0
+      message-id: <BAY103-F28070ECF509B48E8F10ECEC2910@phx.gbl>
+      generated: afa65bf43cdc37611f256805e4a95348cdc2c1c6bccfb4f82cd01fc3@1149279927@<users.httpd.apache.org>
+      v0.10: 8c85580c8cb79e9f55dd6c209c1076b4d2c6388c1c2929816b3ccf64@1149279927@<users.httpd.apache.org>
+    - index: 1
+      message-id: <BAY117-F8A51AB1A746DB7C5C868BB4910@phx.gbl>
+      generated: 6cfd52153b01d182733da82ef9905f465aa3ea09bf42a3e579510afd@1149280616@<users.httpd.apache.org>
+      v0.10: b4614429ce0ee2934bcd730060b85eae7d1087a84330b16d5891ecc4@1149280616@<users.httpd.apache.org>
+    - index: 2
+      message-id: <BAY103-F36A0C2427095C72D377474C2940@phx.gbl>
+      generated: 01a05b64545432e6dea648639e26515a0ad0b365276c08ca1d1dd3d9@1149518530@<users.httpd.apache.org>
+      v0.10: 03f820ff8720bea3270c5d726f47acfa823b97b80414ee6edc45bff5@1149518530@<users.httpd.apache.org>
+    - index: 3
+      message-id: <BAY103-F115CA57A21C2C56030731CE2950@phx.gbl>
+      generated: e4a7dd49cc97768415960a077839164b49d68423ac52064713500f3d@1149556790@<users.httpd.apache.org>
+      v0.10: 1208fe80b452f5f3b8d660a4d7acacda8c286db3d9ace550cbd14e40@1149556790@<users.httpd.apache.org>
+    - index: 4
+      message-id: <BAY103-F11410841CDE610A1EFC53E2950@phx.gbl>
+      generated: cbda2bd3506b8a39575cbd1d1dc1e43674d49a78cb7bcae9509d448a@1149556828@<users.httpd.apache.org>
+      v0.10: 4ff7f6fe01bb8777ce0f47084429044d3a6e5da6fd397cc99c0cde36@1149556828@<users.httpd.apache.org>
+    - index: 5
+      message-id: <BAY103-F381B373856C3F8BAEF7649E2950@phx.gbl>
+      generated: 8f0cb30858cbe596264d09a8bad7c44635a6371e3e0af027fedbfeb8@1149556889@<users.httpd.apache.org>
+      v0.10: df5241d8d7e292fef2fc758a112db6eff704125fed86d4cda7e61dae@1149556889@<users.httpd.apache.org>
+    - index: 6
+      message-id: <BAY103-F9B586FFD1CFE6D9112763E2950@phx.gbl>
+      generated: 31c2ae52820e35eecc06111a6e443ff0ff6e03d3374e9f2a494bb338@1149556917@<users.httpd.apache.org>
+      v0.10: 9477d206dada242e3291d2884136e6285f4b21c3a121c8cb67de2567@1149556917@<users.httpd.apache.org>
+    - index: 7
+      message-id: <BAY103-F802BFA93952CB192373C4E2950@phx.gbl>
+      generated: 986e3cbcdc69577dcba4319367f41818da2c9b8f5e0e98548edeca72@1149556939@<users.httpd.apache.org>
+      v0.10: 66cac5989266dc04d975e382521f3b714ae033363e963c7bd529b3c2@1149556939@<users.httpd.apache.org>
+    - index: 8
+      message-id: <BAY103-F40D7A4EF5AC184C9769209E2950@phx.gbl>
+      generated: 02d013d37c122c8e4356a2380983592ab6fbd22bb83ee397f68e1d67@1149556965@<users.httpd.apache.org>
+      v0.10: 79c8bfe5c762cc29ce827b2f4508d0e5154f3eac6a7d5096a6948a02@1149556965@<users.httpd.apache.org>
+    - index: 9
+      message-id: <BAY103-F1C665A56AE3A65074D38DE2950@phx.gbl>
+      generated: 46a99d67aa26190fe37bda5f89c4690379d752e304fc9e5784d05a7f@1149557015@<users.httpd.apache.org>
+      v0.10: 0b787af017aa497ba1ad7360e41813bbe897ce916d3fb4d11db0b48e@1149557015@<users.httpd.apache.org>
+    - index: 10
+      message-id: <BAY103-F192188E821DBDA96D8C790C27E0@phx.gbl>
+      generated: a290cd0ad6ece5c770b80a4afed408e321cd3825568cee0181bc9298@1151433304@<users.httpd.apache.org>
+      v0.10: a833f80b69daffd9035974687b3a528124c0dbb9f8f7a746f2697191@1151433304@<users.httpd.apache.org>
+    - index: 11
+      message-id: <BAY103-F40786C94EB9152F563E277ED720@phx.gbl>
+      generated: 616106d74910f509706295764c326576f5cfa13fdb50164db05f1e92@1151716372@<users.httpd.apache.org>
+      v0.10: d5ef26b5d501c31413596b8485b9d466d280d7ac5e3579ab88fb5d30@1151716372@<users.httpd.apache.org>
+    medium:
+    - index: 0
+      message-id: <BAY103-F28070ECF509B48E8F10ECEC2910@phx.gbl>
+      generated: a328785f7c1db7d42fb0be8687ae5d46c2c2044f0082f02b26e75009@<users.httpd.apache.org>
+      v0.10: fe602675a3a0750490d5b458d98148a13035787c445af8aa89a2a5d2@<users.httpd.apache.org>
+    - index: 1
+      message-id: <BAY117-F8A51AB1A746DB7C5C868BB4910@phx.gbl>
+      generated: aed625444b2c9c0ea3548f57309005a8c1f672b325f7456a96186cef@<users.httpd.apache.org>
+      v0.10: 0982ba512517dd9eeab49b5e1633659870e481dccb3ed6bd9399a3f8@<users.httpd.apache.org>
+    - index: 2
+      message-id: <BAY103-F36A0C2427095C72D377474C2940@phx.gbl>
+      generated: 0101c4ca7205a57be22f07e68172c10d50b928644b1232089a84b5b1@<users.httpd.apache.org>
+      v0.10: 87c1d92c06a228f85bb1f93f8ceb2eb3c5e450fdd41a7be8e712db07@<users.httpd.apache.org>
+    - index: 3
+      message-id: <BAY103-F115CA57A21C2C56030731CE2950@phx.gbl>
+      generated: 2b6f3c8ce69214e22d2e9e71910b4821a6ed7ad97d5625bdcdaa55f5@<users.httpd.apache.org>
+      v0.10: 5de8110ee04365a7c805c65cb6b7166a63478c6d1f93ccc525836be1@<users.httpd.apache.org>
+    - index: 4
+      message-id: <BAY103-F11410841CDE610A1EFC53E2950@phx.gbl>
+      generated: 65288e86a00577603e4bf30d9fc37edf15b158e4cf49c1ffb58fb61d@<users.httpd.apache.org>
+      v0.10: e21e3245c8646e7bb3538df34ed4c3b5057bc7c21b4b70477f34fe90@<users.httpd.apache.org>
+    - index: 5
+      message-id: <BAY103-F381B373856C3F8BAEF7649E2950@phx.gbl>
+      generated: a8fbb15017f96071890e0cd838df44e22bec006519c1dd257750bb16@<users.httpd.apache.org>
+      v0.10: 15c0b7150d9e5abcb5129ede1cb16d60b28876927cf062ee70954754@<users.httpd.apache.org>
+    - index: 6
+      message-id: <BAY103-F9B586FFD1CFE6D9112763E2950@phx.gbl>
+      generated: eae0cd27fa6d04b1f5051a6b8f4cb34ffc52062755ed3eb5c1d3bc19@<users.httpd.apache.org>
+      v0.10: 6e14c528eb841fa388bf23d7d075f954ab67a1af6fdf6c03df98d18f@<users.httpd.apache.org>
+    - index: 7
+      message-id: <BAY103-F802BFA93952CB192373C4E2950@phx.gbl>
+      generated: 908db74e8ad18a05f79fe0ef15d212cbf952d33178aded7390626e66@<users.httpd.apache.org>
+      v0.10: 1c219ec3788f5786be915a76a5f213c27b631719e1e019bf92291bb4@<users.httpd.apache.org>
+    - index: 8
+      message-id: <BAY103-F40D7A4EF5AC184C9769209E2950@phx.gbl>
+      generated: f781b77a8487df9c67f7d30b2db69de95fbc414c5eac9fdb54396e82@<users.httpd.apache.org>
+      v0.10: 4fd9d6e2f9ae62cfe80210b86de3fd81156949e622c9080149d7a9a3@<users.httpd.apache.org>
+    - index: 9
+      message-id: <BAY103-F1C665A56AE3A65074D38DE2950@phx.gbl>
+      generated: d20e0b947d0c6c686f39f621000cfbe3f86c641136d512e653acaa58@<users.httpd.apache.org>
+      v0.10: 19a566d9850655785be897c6b5c01380c489542e5f63e7a8e189eea8@<users.httpd.apache.org>
+    - index: 10
+      message-id: <BAY103-F192188E821DBDA96D8C790C27E0@phx.gbl>
+      generated: 36d7b151f9dfa0e68f9919974af28c10b45ca672d990df6a20ec75d8@<users.httpd.apache.org>
+      v0.10: 34a899b370d724f846533be398b4b69f4e50f5e7b7a339762fa3bac7@<users.httpd.apache.org>
+    - index: 11
+      message-id: <BAY103-F40786C94EB9152F563E277ED720@phx.gbl>
+      generated: 65f52f3f886ccc7d2677ca84dc53923e1bd2ac4eb32bba0268130ccc@<users.httpd.apache.org>
+      v0.10: 4010aa500281d93b27e40ef4c4862df6cf78612c7da136eab63c789c@<users.httpd.apache.org>
+

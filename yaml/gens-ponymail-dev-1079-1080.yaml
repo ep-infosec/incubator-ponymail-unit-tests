@@ -1,0 +1,16 @@
+generators:
+  # Identical mails, different archivers
+  # N.B. Should be different from below
+  corpus/ponymail-dev-1079-mailarchiesao.mbox: null
+  corpus/ponymail-dev-1079-mboxvm.mbox:
+    dkim:
+    - index: 0
+      message-id: <CAOwvvydHMY2oa8t4m+UWi8N4o+3JgdqSxujqRueP+OoiNW1EQg@mail.gmail.com>
+      generated: 3pl2vytt85zjpsbg7gvpx5kqt0ck30nk
+  corpus/ponymail-dev-1080-mailarchiesao.mbox: null
+  corpus/ponymail-dev-1080-mboxvm.mbox: null
+  corpus/ponymail-dev-1080-listsao.mbox:
+    dkim:
+    - index: 0
+      message-id: <CAOwvvydHMY2oa8t4m+UWi8N4o+3JgdqSxujqRueP+OoiNW1EQg@mail.gmail.com>
+      generated: 3pl2vytt85zjpsbg7gvpx5kqt0ck30nk

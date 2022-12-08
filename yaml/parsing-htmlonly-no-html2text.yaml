@@ -1,0 +1,16 @@
+args:
+  parse_html: false
+parsing:
+  corpus/nexus-html-only.mbox:
+  - index: 0
+    message-id: <977019191.23.1464076647005.JavaMail.nexus@repository-vm.apache.org>
+    body_sha3_256: null
+    attachments: null
+  - index: 1
+    message-id: <823318428.26.1464146799819.JavaMail.nexus@repository-vm.apache.org>
+    body_sha3_256: null
+    attachments: null
+  - index: 2
+    message-id: <1964144158.29.1464291695849.JavaMail.nexus@repository-vm.apache.org>
+    body_sha3_256: null
+    attachments: null

@@ -1,0 +1,185 @@
+From dev-return-124652-archive-asf-public=cust-asf.ponee.io@maven.apache.org Tue Nov 28 21:04:45 2017
+Return-Path: <dev-return-124652-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public-internal@cust-asf2.ponee.io
+Delivered-To: archive-asf-public-internal@cust-asf2.ponee.io
+Received: from cust-asf.ponee.io (cust-asf.ponee.io [163.172.22.183])
+	by cust-asf2.ponee.io (Postfix) with ESMTP id 728C5200D4A
+	for <archive-asf-public-internal@cust-asf2.ponee.io>; Tue, 28 Nov 2017 22:04:45 +0100 (CET)
+Received: by cust-asf.ponee.io (Postfix)
+	id 71124160C07; Tue, 28 Nov 2017 21:04:45 +0000 (UTC)
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id B645B160BE7
+	for <archive-asf-public@cust-asf.ponee.io>; Tue, 28 Nov 2017 22:04:44 +0100 (CET)
+Received: (qmail 56234 invoked by uid 500); 28 Nov 2017 21:04:43 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 56223 invoked by uid 99); 28 Nov 2017 21:04:43 -0000
+Received: from mail-relay.apache.org (HELO mail-relay.apache.org) (140.211.11.15)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Tue, 28 Nov 2017 21:04:43 +0000
+Received: from mail-yw0-f170.google.com (mail-yw0-f170.google.com [209.85.161.170])
+	by mail-relay.apache.org (ASF Mail Server at mail-relay.apache.org) with ESMTPSA id C8B151A008C
+	for <dev@maven.apache.org>; Tue, 28 Nov 2017 21:04:42 +0000 (UTC)
+Received: by mail-yw0-f170.google.com with SMTP id m129so517256ywb.11
+        for <dev@maven.apache.org>; Tue, 28 Nov 2017 13:04:42 -0800 (PST)
+X-Gm-Message-State: AJaThX7U7hKNzU848ssaKjBIlE4FJnJe5EJtSKgnTX0y1XeXzNANMXx/
+	81sdMEhEq4Q48H75y840esTN1oeTmJtMnCg8e58=
+X-Google-Smtp-Source: AGs4zMbBG+zqQ3sBuDUvtxAAKtZjB0WmYuYs5uIpEzi6g9OylqQM4rdoxy3VpfPu234TwTyGLx+DoQCIxofZ6mETWd4=
+X-Received: by 10.129.83.67 with SMTP id h64mr322478ywb.169.1511903081321;
+ Tue, 28 Nov 2017 13:04:41 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.129.122.151 with HTTP; Tue, 28 Nov 2017 13:04:40 -0800 (PST)
+In-Reply-To: <CAPLpRQLQ2eLAstOtAGRRfU4NEJV0FfBN8jwarXLdeUS+FNs-+A@mail.gmail.com>
+References: <CAKuVzBTcnqKh8d4KNSKchvp4dGLcZw2eDwMinKZ1UKBz8129XA@mail.gmail.com>
+ <CAA9S6i7=JSV4n59Nke5+a2hW-4H+c_AQv4x3vG5mLggizdvBQA@mail.gmail.com>
+ <CAKuVzBTLAAx+6=5m+QY7cOUO+S_yzV7LBD3cdb7qFWP_7=hsjg@mail.gmail.com> <CAPLpRQLQ2eLAstOtAGRRfU4NEJV0FfBN8jwarXLdeUS+FNs-+A@mail.gmail.com>
+From: Tibor Digana <tibordigana@apache.org>
+Date: Tue, 28 Nov 2017 22:04:40 +0100
+X-Gmail-Original-Message-ID: <CAKuVzBSyG-8Bnor7sezCp6z0Cv+Jng0o11HN4hBx10BjWCQnOw@mail.gmail.com>
+Message-ID: <CAKuVzBSyG-8Bnor7sezCp6z0Cv+Jng0o11HN4hBx10BjWCQnOw@mail.gmail.com>
+Subject: Re: Problem to download dependency on Ubuntu
+To: Maven Developers List <dev@maven.apache.org>
+Content-Type: multipart/alternative; boundary="001a114d8af018dc45055f115e76"
+archived-at: Tue, 28 Nov 2017 21:04:45 -0000
+
+--001a114d8af018dc45055f115e76
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+>>From "Failed to create parent directories"...
+
+It is multi-module project but it does not have any parent POM. It is fully
+isolated project - Microservice.
+
+>>Local repo directory ownership/permissions?
+All is done in my user home.
+cd ~
+git clone ...
+cd ...
+mvn -X -U clean
+
+
+Thx
+Tibor
+
+
+On Tue, Nov 28, 2017 at 8:31 PM, Tam=C3=A1s Cserven=C3=A1k <tamas@cservenak=
+.net>
+wrote:
+
+> My 5c:
+> From "Failed to create parent directories"...
+>
+> Local repo directory ownership/permissions?
+>
+> HTH,
+> T
+>
+> On Tue, Nov 28, 2017 at 7:21 PM Tibor Digana <tibordigana@apache.org>
+> wrote:
+>
+> > The settings.xml:
+> >
+> > <?xml version=3D"1.0" encoding=3D"UTF-8"?>
+> > <settings xmlns=3D"http://maven.apache.org/SETTINGS/1.0.0"
+> >           xmlns:xsi=3D"http://www.w3.org/2001/XMLSchema-instance"
+> >           xsi:schemaLocation=3D"http://maven.apache.org/SETTINGS/1.0.0
+> > http://maven.apache.org/xsd/settings-1.0.0.xsd">
+> >
+> >     <localRepository>/home/xms40/.m2/repository</localRepository>
+> >
+> >     <mirrors>
+> >         <mirror>
+> >             <id>nexus</id>
+> >             <mirrorOf>*</mirrorOf>
+> >             <name>Sonatype Nexus</name>
+> >             <url>http://mavenrepo.ads.local/nexus/content/groups/public
+> > </url>
+> >         </mirror>
+> >     </mirrors>
+> >    <servers>
+> >       <server>
+> >          <id>nexus</id>
+> >          <username>***</username>
+> >          <password>***</password>
+> >       </server>
+> >    </servers>
+> >
+> >
+> > </settings>
+> >
+> >
+> > On Mon, Nov 27, 2017 at 10:46 PM, Nick Stolwijk <nick.stolwijk@gmail.co=
+m
+> >
+> > wrote:
+> >
+> > > Did you also configure your proxy in the settings.xml? [1]
+> > >
+> > > Hth,
+> > >
+> > > Nick
+> > >
+> > > [1] https://maven.apache.org/guides/mini/guide-proxies.html
+> > >
+> > > Nick Stolwijk
+> > >
+> > > ~~~ Try to leave this world a little better than you found it and, wh=
+en
+> > > your turn comes to die, you can die happy in feeling that at any rate
+> you
+> > > have not wasted your time but have done your best ~~~
+> > >
+> > > Lord Baden-Powell
+> > >
+> > > On Mon, Nov 27, 2017 at 10:22 PM, Tibor Digana <tibordigana@apache.or=
+g
+> >
+> > > wrote:
+> > >
+> > > > My command *mvn clean* is not able to download a new artifact
+> > > > *org.arquillian.universe:arquillian-junit:pom*
+> > > > however it exists on Maven Central.
+> > > >
+> > > > I run the command on Ubuntu Konsole, and nothing is downloaded.
+> > > > When I run wget [1] from the same Konsole, the POM is downloaded.
+> > > >
+> > > > The settings.xml is not a problem, I checked. There is a mirror of
+> > > central
+> > > > and URL of Nexus in company.
+> > > >
+> > > > Is there any native difference between wget and mvn/Java on Ubuntu =
+so
+> > > that
+> > > > the remote mavenrepo may not be reached?
+> > > > I did setup of /etc/environment, /etc/network/interface, ~/.profile
+> due
+> > > to
+> > > > proxy, DNS, http_no_proxy, etc. but nothing helps.
+> > > >
+> > > > Any hint would be helpful here.
+> > > > MAVEN and JAVA_OPTS is not set.
+> > > >
+> > > > [1]: wget
+> > > > http://mavenrepo.ads.local/nexus/content/groups/public/
+> > > > org/arquillian/arquillian-universe/1.1.13.7/arquillian-
+> > > > universe-1.1.13.7.pom
+> > > >
+> > > > Thx
+> > > > Tibor
+> > > >
+> > >
+> >
+> --
+> Thanks,
+> ~t~
+>
+
+--001a114d8af018dc45055f115e76--
+

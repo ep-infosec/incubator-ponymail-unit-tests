@@ -1,0 +1,2128 @@
+From dev-return-124335-archive-asf-public=cust-asf.ponee.io@maven.apache.org Thu Oct 26 07:40:08 2017
+Return-Path: <dev-return-124335-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 202941609E8
+	for <archive-asf-public@cust-asf.ponee.io>; Thu, 26 Oct 2017 09:40:08 +0200 (CEST)
+Received: (qmail 16272 invoked by uid 500); 26 Oct 2017 07:40:07 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 15739 invoked by uid 99); 26 Oct 2017 07:40:07 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Thu, 26 Oct 2017 07:40:07 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] asfgit closed pull request #20: MENFORCER-195 - use DependencyGraphBuilder API instead of DependencyTreeBuilder
+Message-ID: <150900360646.1628.1174937787253115811.gitbox@gitbox.apache.org>
+archived-at: Thu, 26 Oct 2017 07:40:09 -0000
+
+asfgit closed pull request #20: MENFORCER-195 - use DependencyGraphBuilder API instead of DependencyTreeBuilder
+URL: https://github.com/apache/maven-enforcer/pull/20
+ 
+ 
+   
+
+This is a PR merged from a forked repository.
+As GitHub hides the original diff on merge, it is displayed below for
+the sake of provenance:
+
+As this is a foreign pull request (from a fork), the diff is supplied
+below (as it won't show otherwise due to GitHub magic):
+
+diff --git a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/DependencyConvergence.java b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/DependencyConvergence.java
+index 7c21bd6..75d9842 100644
+--- a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/DependencyConvergence.java
++++ b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/DependencyConvergence.java
+@@ -24,10 +24,6 @@
+ import java.util.List;
+ 
+ import org.apache.maven.artifact.Artifact;
+-import org.apache.maven.artifact.factory.ArtifactFactory;
+-import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
+-import org.apache.maven.artifact.repository.ArtifactRepository;
+-import org.apache.maven.artifact.resolver.ArtifactCollector;
+ import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
+ import org.apache.maven.enforcer.rule.api.EnforcerRule;
+ import org.apache.maven.enforcer.rule.api.EnforcerRuleException;
+@@ -35,9 +31,9 @@
+ import org.apache.maven.plugin.logging.Log;
+ import org.apache.maven.plugins.enforcer.utils.DependencyVersionMap;
+ import org.apache.maven.project.MavenProject;
+-import org.apache.maven.shared.dependency.tree.DependencyNode;
+-import org.apache.maven.shared.dependency.tree.DependencyTreeBuilder;
+-import org.apache.maven.shared.dependency.tree.DependencyTreeBuilderException;
++import org.apache.maven.shared.dependency.graph.DependencyGraphBuilder;
++import org.apache.maven.shared.dependency.graph.DependencyGraphBuilderException;
++import org.apache.maven.shared.dependency.graph.DependencyNode;
+ import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
+ import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+ import org.codehaus.plexus.i18n.I18N;
+@@ -63,7 +59,7 @@ public void setUniqueVersions( boolean uniqueVersions )
+     // CHECKSTYLE_OFF: LineLength
+     /**
+      * Uses the {@link EnforcerRuleHelper} to populate the values of the
+-     * {@link DependencyTreeBuilder#buildDependencyTree(MavenProject, ArtifactRepository, ArtifactFactory, ArtifactMetadataSource, ArtifactFilter, ArtifactCollector)}
++     * {@link DependencyGraphBuilder#buildDependencyGraph(MavenProject, ArtifactFilter)}
+      * factory method. <br/>
+      * This method simply exists to hide all the ugly lookup that the {@link EnforcerRuleHelper} has to do.
+      * 
+@@ -78,17 +74,11 @@ private DependencyNode getNode( EnforcerRuleHelper helper )
+         try
+         {
+             MavenProject project = (MavenProject) helper.evaluate( "${project}" );
+-            DependencyTreeBuilder dependencyTreeBuilder =
+-                (DependencyTreeBuilder) helper.getComponent( DependencyTreeBuilder.class );
+-            ArtifactRepository repository = (ArtifactRepository) helper.evaluate( "${localRepository}" );
+-            ArtifactFactory factory = (ArtifactFactory) helper.getComponent( ArtifactFactory.class );
+-            ArtifactMetadataSource metadataSource =
+-                (ArtifactMetadataSource) helper.getComponent( ArtifactMetadataSource.class );
+-            ArtifactCollector collector = (ArtifactCollector) helper.getComponent( ArtifactCollector.class );
++            DependencyGraphBuilder dependencyGraphBuilder =
++                (DependencyGraphBuilder) helper.getComponent( DependencyGraphBuilder.class );
+             ArtifactFilter filter = null; // we need to evaluate all scopes
+-            DependencyNode node = dependencyTreeBuilder.buildDependencyTree( project, repository, factory,
+-                                                                             metadataSource, filter, collector );
+-            return node;
++
++            return dependencyGraphBuilder.buildDependencyGraph( project, filter );
+         }
+         catch ( ExpressionEvaluationException e )
+         {
+@@ -98,7 +88,7 @@ private DependencyNode getNode( EnforcerRuleHelper helper )
+         {
+             throw new EnforcerRuleException( "Unable to lookup a component " + e.getLocalizedMessage(), e );
+         }
+-        catch ( DependencyTreeBuilderException e )
++        catch ( DependencyGraphBuilderException e )
+         {
+             throw new EnforcerRuleException( "Could not build dependency tree " + e.getLocalizedMessage(), e );
+         }
+diff --git a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java
+index 71210e2..426c32d 100644
+--- a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java
++++ b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java
+@@ -26,10 +26,6 @@
+ import java.util.Map;
+ 
+ import org.apache.maven.artifact.Artifact;
+-import org.apache.maven.artifact.factory.ArtifactFactory;
+-import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
+-import org.apache.maven.artifact.repository.ArtifactRepository;
+-import org.apache.maven.artifact.resolver.ArtifactCollector;
+ import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
+ import org.apache.maven.artifact.versioning.ArtifactVersion;
+ import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+@@ -38,10 +34,10 @@
+ import org.apache.maven.enforcer.rule.api.EnforcerRuleHelper;
+ import org.apache.maven.plugin.logging.Log;
+ import org.apache.maven.project.MavenProject;
+-import org.apache.maven.shared.dependency.tree.DependencyNode;
+-import org.apache.maven.shared.dependency.tree.DependencyTreeBuilder;
+-import org.apache.maven.shared.dependency.tree.DependencyTreeBuilderException;
+-import org.apache.maven.shared.dependency.tree.traversal.DependencyNodeVisitor;
++import org.apache.maven.shared.dependency.graph.DependencyGraphBuilder;
++import org.apache.maven.shared.dependency.graph.DependencyGraphBuilderException;
++import org.apache.maven.shared.dependency.graph.DependencyNode;
++import org.apache.maven.shared.dependency.graph.traversal.DependencyNodeVisitor;
+ import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
+ import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+ import org.codehaus.plexus.i18n.I18N;
+@@ -78,7 +74,7 @@ public void setUniqueVersions( boolean uniqueVersions )
+     // CHECKSTYLE_OFF: LineLength
+     /**
+      * Uses the {@link EnforcerRuleHelper} to populate the values of the
+-     * {@link DependencyTreeBuilder#buildDependencyTree(MavenProject, ArtifactRepository, ArtifactFactory, ArtifactMetadataSource, ArtifactFilter, ArtifactCollector)}
++     * {@link DependencyGraphBuilder#buildDependencyGraph(MavenProject, ArtifactFilter)}
+      * factory method. <br/>
+      * This method simply exists to hide all the ugly lookup that the {@link EnforcerRuleHelper} has to do.
+      * 
+@@ -87,24 +83,17 @@ public void setUniqueVersions( boolean uniqueVersions )
+      * @throws EnforcerRuleException when the build should fail
+      */
+     // CHECKSTYLE_ON: LineLength
+-    private DependencyNode getNode( EnforcerRuleHelper helper )
++    private DependencyNode getNode(EnforcerRuleHelper helper )
+         throws EnforcerRuleException
+     {
+         try
+         {
+-            MavenProject project = (MavenProject) helper.evaluate( "${project}" );
+-            DependencyTreeBuilder dependencyTreeBuilder =
+-                (DependencyTreeBuilder) helper.getComponent( DependencyTreeBuilder.class );
+-            ArtifactRepository repository = (ArtifactRepository) helper.evaluate( "${localRepository}" );
+-            ArtifactFactory factory = (ArtifactFactory) helper.getComponent( ArtifactFactory.class );
+-            ArtifactMetadataSource metadataSource =
+-                (ArtifactMetadataSource) helper.getComponent( ArtifactMetadataSource.class );
+-            ArtifactCollector collector = (ArtifactCollector) helper.getComponent( ArtifactCollector.class );
++            MavenProject project = (MavenProject) helper.evaluate("${project}");
++            DependencyGraphBuilder dependencyGraphBuilder =
++                    (DependencyGraphBuilder) helper.getComponent(DependencyGraphBuilder.class);
+             ArtifactFilter filter = null; // we need to evaluate all scopes
+-            DependencyNode node =
+-                dependencyTreeBuilder.buildDependencyTree( project, repository, factory, metadataSource, filter,
+-                                                           collector );
+-            return node;
++
++            return dependencyGraphBuilder.buildDependencyGraph(project, filter);
+         }
+         catch ( ExpressionEvaluationException e )
+         {
+@@ -114,7 +103,7 @@ private DependencyNode getNode( EnforcerRuleHelper helper )
+         {
+             throw new EnforcerRuleException( "Unable to lookup a component " + e.getLocalizedMessage(), e );
+         }
+-        catch ( DependencyTreeBuilderException e )
++        catch ( DependencyGraphBuilderException e )
+         {
+             throw new EnforcerRuleException( "Could not build dependency tree " + e.getLocalizedMessage(), e );
+         }
+diff --git a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/DependencyVersionMap.java b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/DependencyVersionMap.java
+index 2ec4ac2..ece772b 100644
+--- a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/DependencyVersionMap.java
++++ b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/DependencyVersionMap.java
+@@ -26,8 +26,8 @@
+ 
+ import org.apache.maven.artifact.Artifact;
+ import org.apache.maven.plugin.logging.Log;
+-import org.apache.maven.shared.dependency.tree.DependencyNode;
+-import org.apache.maven.shared.dependency.tree.traversal.DependencyNodeVisitor;
++import org.apache.maven.shared.dependency.graph.DependencyNode;
++import org.apache.maven.shared.dependency.graph.traversal.DependencyNodeVisitor;
+ 
+ /**
+  * @author Brian Fox
+
+
+ 
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124337-archive-asf-public=cust-asf.ponee.io@maven.apache.org Thu Oct 26 07:40:09 2017
+Return-Path: <dev-return-124337-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 19A401609E8
+	for <archive-asf-public@cust-asf.ponee.io>; Thu, 26 Oct 2017 09:40:09 +0200 (CEST)
+Received: (qmail 16848 invoked by uid 500); 26 Oct 2017 07:40:08 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 16129 invoked by uid 99); 26 Oct 2017 07:40:07 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Thu, 26 Oct 2017 07:40:07 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] asfgit closed pull request #28: [MENFORCER-281] added IT to show the issue.
+Message-ID: <150900360664.1639.5869177521340218489.gitbox@gitbox.apache.org>
+archived-at: Thu, 26 Oct 2017 07:40:10 -0000
+
+asfgit closed pull request #28: [MENFORCER-281] added IT to show the issue.
+URL: https://github.com/apache/maven-enforcer/pull/28
+ 
+ 
+   
+
+This is a PR merged from a forked repository.
+As GitHub hides the original diff on merge, it is displayed below for
+the sake of provenance:
+
+As this is a foreign pull request (from a fork), the diff is supplied
+below (as it won't show otherwise due to GitHub magic):
+
+diff --git a/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/invoker.properties b/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/invoker.properties
+new file mode 100644
+index 0000000..a07d2f1
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/invoker.properties
+@@ -0,0 +1,17 @@
++# Licensed to the Apache Software Foundation (ASF) under one
++# or more contributor license agreements.  See the NOTICE file
++# distributed with this work for additional information
++# regarding copyright ownership.  The ASF licenses this file
++# to you under the Apache License, Version 2.0 (the
++# "License"); you may not use this file except in compliance
++# with the License.  You may obtain a copy of the License at
++#
++#  http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing,
++# software distributed under the License is distributed on an
++# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++# KIND, either express or implied.  See the License for the
++# specific language governing permissions and limitations
++# under the License.
++invoker.goals = install -Drevision=0.10.0-SNAPSHOT
+\ No newline at end of file
+diff --git a/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/menforcer281-module/pom.xml b/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/menforcer281-module/pom.xml
+new file mode 100644
+index 0000000..a6807af
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/menforcer281-module/pom.xml
+@@ -0,0 +1,36 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<!--
++Licensed to the Apache Software Foundation (ASF) under one
++or more contributor license agreements.  See the NOTICE file
++distributed with this work for additional information
++regarding copyright ownership.  The ASF licenses this file
++to you under the Apache License, Version 2.0 (the
++"License"); you may not use this file except in compliance
++with the License.  You may obtain a copy of the License at
++
++  http://www.apache.org/licenses/LICENSE-2.0
++
++Unless required by applicable law or agreed to in writing,
++software distributed under the License is distributed on an
++"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++KIND, either express or implied.  See the License for the
++specific language governing permissions and limitations
++under the License.
++-->
++
++<project>
++  <modelVersion>4.0.0</modelVersion>
++  <parent>
++    <groupId>org.apache.maven.its.enforcer</groupId>
++    <artifactId>menforcer281-parent</artifactId>
++    <version>${revision}</version>
++  </parent>
++
++  <artifactId>menforcer281-module</artifactId>
++  <packaging>pom</packaging>
++
++  <description>
++  </description>
++
++</project>
+diff --git a/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/pom.xml b/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/pom.xml
+new file mode 100644
+index 0000000..e9d613b
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-plugin-versions-mm-ci-friendly/pom.xml
+@@ -0,0 +1,115 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<!--
++Licensed to the Apache Software Foundation (ASF) under one
++or more contributor license agreements.  See the NOTICE file
++distributed with this work for additional information
++regarding copyright ownership.  The ASF licenses this file
++to you under the Apache License, Version 2.0 (the
++"License"); you may not use this file except in compliance
++with the License.  You may obtain a copy of the License at
++
++  http://www.apache.org/licenses/LICENSE-2.0
++
++Unless required by applicable law or agreed to in writing,
++software distributed under the License is distributed on an
++"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++KIND, either express or implied.  See the License for the
++specific language governing permissions and limitations
++under the License.
++-->
++
++<project>
++  <modelVersion>4.0.0</modelVersion>
++
++  <groupId>org.apache.maven.its.enforcer</groupId>
++  <artifactId>menforcer281-parent</artifactId>
++  <version>${revision}</version>
++  <packaging>pom</packaging>
++
++  <description>
++  </description>
++  
++  <properties>
++    <revision>0.0.1-SNAPSHOT</revision>
++  </properties>
++
++  <build>
++    <pluginManagement>
++      <plugins>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-clean-plugin</artifactId>
++          <version>2.5</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-resources-plugin</artifactId>
++          <version>2.6</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-compiler-plugin</artifactId>
++          <version>2.5.1</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-surefire-plugin</artifactId>
++          <version>2.12.4</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-jar-plugin</artifactId>
++          <version>2.4</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-install-plugin</artifactId>
++          <version>2.4</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-deploy-plugin</artifactId>
++          <version>2.7</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-site-plugin</artifactId>
++          <version>3.2</version>
++        </plugin>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-enforcer-plugin</artifactId>
++          <version>@project.version@</version>
++          <executions>
++            <execution>
++              <id>test</id>
++              <goals>
++                <goal>enforce</goal>
++              </goals>
++              <configuration>
++                <rules>
++                  <requirePluginVersions>
++                    <banSnapshots>false</banSnapshots>
++                  </requirePluginVersions>
++                </rules>
++              </configuration>
++            </execution>
++          </executions>
++        </plugin>
++      </plugins>
++    </pluginManagement>
++
++    <plugins>
++      <plugin>
++        <groupId>org.apache.maven.plugins</groupId>
++        <artifactId>maven-enforcer-plugin</artifactId>
++        <version>@project.version@</version>
++      </plugin>
++    </plugins>
++  </build>
++  
++  <modules>
++    <module>menforcer281-module</module>
++  </modules>
++</project>
+
+
+ 
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124338-archive-asf-public=cust-asf.ponee.io@maven.apache.org Thu Oct 26 07:40:10 2017
+Return-Path: <dev-return-124338-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 7F2E7160BF2
+	for <archive-asf-public@cust-asf.ponee.io>; Thu, 26 Oct 2017 09:40:10 +0200 (CEST)
+Received: (qmail 16859 invoked by uid 500); 26 Oct 2017 07:40:08 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 16131 invoked by uid 99); 26 Oct 2017 07:40:07 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Thu, 26 Oct 2017 07:40:07 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] asfgit closed pull request #25: MENFORCER-276 - Support ignoring dependency scopes in RequireUpperBoundDeps
+Message-ID: <150900360659.1632.749801523714658816.gitbox@gitbox.apache.org>
+archived-at: Thu, 26 Oct 2017 07:40:11 -0000
+
+asfgit closed pull request #25: MENFORCER-276 - Support ignoring dependency scopes in RequireUpperBoundDeps
+URL: https://github.com/apache/maven-enforcer/pull/25
+ 
+ 
+   
+
+This is a PR merged from a forked repository.
+As GitHub hides the original diff on merge, it is displayed below for
+the sake of provenance:
+
+As this is a foreign pull request (from a fork), the diff is supplied
+below (as it won't show otherwise due to GitHub magic):
+
+diff --git a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java
+index 2600b36..4c0ccde 100644
+--- a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java
++++ b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequireUpperBoundDeps.java
+@@ -21,9 +21,11 @@
+ 
+ import java.util.ArrayList;
+ import java.util.Collections;
++import java.util.HashSet;
+ import java.util.LinkedHashMap;
+ import java.util.List;
+ import java.util.Map;
++import java.util.Set;
+ 
+ import org.apache.maven.artifact.Artifact;
+ import org.apache.maven.artifact.factory.ArtifactFactory;
+@@ -67,6 +69,13 @@
+      * @since TBD
+      */
+     private List<String> excludes = null;
++    
++    /**
++     * Dependency scopes to ignore.
++     * 
++     * @since TBD
++     */
++    private List<String> ignoredDependencyScopes;
+ 
+     /**
+      * Set to {@code true} if timestamped snapshots should be used.
+@@ -88,6 +97,17 @@ public void setExcludes( List<String> excludes )
+         this.excludes = excludes;
+     }
+ 
++    /**
++     * Ignores particular dependency scopes.
++     * 
++     * @param scopes a list of ignored scopes
++     * @since TBD
++     */
++    public void setIgnoreDependencyScopes( List<String> scopes ) 
++    {
++        this.ignoredDependencyScopes = scopes;
++    }
++
+     // CHECKSTYLE_OFF: LineLength
+     /**
+      * Uses the {@link EnforcerRuleHelper} to populate the values of the
+@@ -143,8 +163,8 @@ public void execute( EnforcerRuleHelper helper )
+         try
+         {
+             DependencyNode node = getNode( helper );
+-            RequireUpperBoundDepsVisitor visitor = new RequireUpperBoundDepsVisitor();
+-            visitor.setUniqueVersions( uniqueVersions );
++            RequireUpperBoundDepsVisitor visitor = new RequireUpperBoundDepsVisitor
++                    ( uniqueVersions, ignoredDependencyScopes, log );
+             node.accept( visitor );
+             List<String> errorMessages = buildErrorMessages( visitor.getConflicts() );
+             if ( errorMessages.size() > 0 )
+@@ -242,11 +262,16 @@ private String getFullArtifactName( DependencyNode node, boolean usePremanaged )
+         implements DependencyNodeVisitor
+     {
+ 
+-        private boolean uniqueVersions;
++        private final boolean uniqueVersions;
++        private final Set<String> ignoredDependencyScopes;
++        private final Log log;
+ 
+-        public void setUniqueVersions( boolean uniqueVersions )
++        public RequireUpperBoundDepsVisitor( boolean uniqueVersions, List<String> ignoredDependencyScopes, Log log )
+         {
+             this.uniqueVersions = uniqueVersions;
++            this.ignoredDependencyScopes = ignoredDependencyScopes != null 
++                    ? new HashSet<String>( ignoredDependencyScopes ) : null;
++            this.log = log;
+         }
+ 
+         private Map<String, List<DependencyNodeHopCountPair>> keyToPairsMap =
+@@ -254,6 +279,16 @@ public void setUniqueVersions( boolean uniqueVersions )
+ 
+         public boolean visit( DependencyNode node )
+         {
++            Artifact artifact = node.getArtifact();
++            String artifactScope = artifact.getScope();
++            if ( ignoredDependencyScopes != null && ignoredDependencyScopes.contains( artifactScope ) ) 
++            {
++                // If the scope is ignored, skip the artifact and its children
++                String groupArt = artifact.getGroupId() + ":" + artifact.getArtifactId();
++                log.warn( "Skipping dependency " + groupArt + ". Its scope is ignored: " + artifactScope );
++                return false;
++            }
++            
+             DependencyNodeHopCountPair pair = new DependencyNodeHopCountPair( node );
+             String key = pair.constructKey();
+             List<DependencyNodeHopCountPair> pairs = keyToPairsMap.get( key );
+diff --git a/enforcer-rules/src/site/apt/requireUpperBoundDeps.apt.vm b/enforcer-rules/src/site/apt/requireUpperBoundDeps.apt.vm
+index b34a6f4..1c136f7 100644
+--- a/enforcer-rules/src/site/apt/requireUpperBoundDeps.apt.vm
++++ b/enforcer-rules/src/site/apt/requireUpperBoundDeps.apt.vm
+@@ -109,6 +109,11 @@ and
+                     <exclude>com.google.guava:guava</exclude>
+                   </excludes>
+                   -->
++                  <!-- If you wish to ignore certain dependency scopes:
++                  <ignoreDependencyScopes>
++                    <scope>test</scope>
++                  </ignoreDependencyScopes>
++                  -->
+                 </requireUpperBoundDeps>
+               </rules>
+             </configuration>
+diff --git a/enforcer-rules/src/test/java/org/apache/maven/plugins/enforcer/EnforcerTestUtils.java b/enforcer-rules/src/test/java/org/apache/maven/plugins/enforcer/EnforcerTestUtils.java
+index f1bd2c3..03bd847 100644
+--- a/enforcer-rules/src/test/java/org/apache/maven/plugins/enforcer/EnforcerTestUtils.java
++++ b/enforcer-rules/src/test/java/org/apache/maven/plugins/enforcer/EnforcerTestUtils.java
+@@ -121,7 +121,19 @@ public static EnforcerRuleHelper getHelper( MavenProject project )
+      * @param mockExpression the mock expression
+      * @return the helper
+      */
+-    public static EnforcerRuleHelper getHelper( MavenProject project, boolean mockExpression )
++    public static EnforcerRuleHelper getHelper( MavenProject project, boolean mockExpression ) {
++        return getHelper(project, mockExpression, null);
++    }
++    
++    /**
++     * Gets the helper.
++     *
++     * @param project the project
++     * @param mockExpression the mock expression
++     * @param container Plexus container to be used. If {@code null}, a default Maven Session one will be used.
++     * @return the helper
++     */
++    public static EnforcerRuleHelper getHelper( MavenProject project, boolean mockExpression, PlexusContainer container)
+     {
+         MavenSession session = getMavenSession();
+         ExpressionEvaluator eval;
+@@ -136,7 +148,7 @@ public static EnforcerRuleHelper getHelper( MavenProject project, boolean mockEx
+             session.setCurrentProject( project );
+             eval = new PluginParameterExpressionEvaluator( session, mockExecution );
+         }
+-        return new DefaultEnforcementRuleHelper( session, eval, new SystemStreamLog(), null );
++        return new DefaultEnforcementRuleHelper( session, eval, new SystemStreamLog(), container );
+     }
+ 
+     /**
+diff --git a/enforcer-rules/src/test/java/org/apache/maven/plugins/enforcer/TestRequireUpperBoundDeps.java b/enforcer-rules/src/test/java/org/apache/maven/plugins/enforcer/TestRequireUpperBoundDeps.java
+new file mode 100644
+index 0000000..08aa92e
+--- /dev/null
++++ b/enforcer-rules/src/test/java/org/apache/maven/plugins/enforcer/TestRequireUpperBoundDeps.java
+@@ -0,0 +1,187 @@
++package org.apache.maven.plugins.enforcer;
++
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.List;
++import org.apache.maven.artifact.Artifact;
++import org.apache.maven.artifact.factory.ArtifactFactory;
++import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
++import org.apache.maven.artifact.repository.ArtifactRepository;
++import org.apache.maven.artifact.resolver.ArtifactCollector;
++import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
++import org.apache.maven.enforcer.rule.api.EnforcerRuleHelper;
++import org.apache.maven.plugin.testing.ArtifactStubFactory;
++import org.apache.maven.plugins.enforcer.utils.TestEnforcerRuleUtils;
++import org.apache.maven.project.MavenProject;
++import org.apache.maven.shared.dependency.tree.DependencyNode;
++import org.apache.maven.shared.dependency.tree.DependencyTree;
++import org.apache.maven.shared.dependency.tree.DependencyTreeBuilder;
++import org.apache.maven.shared.dependency.tree.DependencyTreeBuilderException;
++import org.codehaus.plexus.DefaultPlexusContainer;
++import org.codehaus.plexus.PlexusContainer;
++import org.junit.Before;
++import org.junit.Test;
++
++/*
++ * Licensed to the Apache Software Foundation (ASF) under one
++ * or more contributor license agreements.  See the NOTICE file
++ * distributed with this work for additional information
++ * regarding copyright ownership.  The ASF licenses this file
++ * to you under the Apache License, Version 2.0 (the
++ * "License"); you may not use this file except in compliance
++ * with the License.  You may obtain a copy of the License at
++ *
++ *  http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing,
++ * software distributed under the License is distributed on an
++ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++ * KIND, either express or implied.  See the License for the
++ * specific language governing permissions and limitations
++ * under the License.
++ */
++
++/**
++ * Tests for {@link RequireUpperBoundDeps}.
++ * @author Oleg Nenashev
++ */
++public class TestRequireUpperBoundDeps {
++    
++    private MavenProject project;
++
++    private EnforcerRuleHelper helper;
++
++    private ArtifactStubFactory factory;
++
++    private RequireUpperBoundDeps rule;
++    private MockDependencyTreeBuilder dependencyTree;
++    
++    Artifact library1_10, library1_20, library2_10;
++    
++    @Before
++    public void before() throws Exception
++    {
++        PlexusContainer c = new DefaultPlexusContainer();
++        dependencyTree = new MockDependencyTreeBuilder();
++        factory = new ArtifactStubFactory();
++        
++        project = new MockProject();
++        project.setArtifact(factory.createArtifact("my", "project", "1.0"));
++        library1_10 = factory.createArtifact("my", "library1", "1.0");
++        library1_20 = factory.createArtifact("my", "library1", "2.0");
++        library2_10 = factory.createArtifact("my", "library2", "1.0");
++        
++        helper = EnforcerTestUtils.getHelper(project, false, c);
++        helper.getContainer().addComponent(dependencyTree, DependencyTreeBuilder.class.getName());
++        
++        rule = new RequireUpperBoundDeps();  
++    }
++    
++    @Test
++    public void testShouldPassForSameDependencies() throws Exception {
++        dependencyTree.addDependency(library1_10);
++        DependencyNode n = new DependencyNode(library2_10);
++        n.addChild(new DependencyNode(library1_10));
++        dependencyTree.addDependency(n);
++                
++        TestEnforcerRuleUtils.execute(rule, helper, false);
++    }
++    
++    @Test
++    public void testShouldFailForNewerDependencies() throws Exception {
++        dependencyTree.addDependency(library1_10);
++        DependencyNode n = new DependencyNode(library2_10);
++        n.addChild(new DependencyNode(library1_20));
++        dependencyTree.addDependency(n);
++                
++        TestEnforcerRuleUtils.execute(rule, helper, true);
++    }
++    
++    @Test
++    public void testShouldPassForOlderDependencies() throws Exception {
++        dependencyTree.addDependency(library1_20);
++        DependencyNode n = new DependencyNode(library2_10);
++        n.addChild(new DependencyNode(library1_10));
++        dependencyTree.addDependency(n);
++                
++        TestEnforcerRuleUtils.execute(rule, helper, false);
++    }
++    
++    // MENFORCER-273
++    @Test
++    public void testShouldPassForOlderDependencyIfExcluded() throws Exception {
++        dependencyTree.addDependency(library1_10);
++        DependencyNode n = new DependencyNode(library2_10);
++        n.addChild(new DependencyNode(library1_20));
++        dependencyTree.addDependency(n);
++                
++        rule.setExcludes(Arrays.asList("my:library1"));
++        TestEnforcerRuleUtils.execute(rule, helper, false);
++    }
++    
++    // MENFORCER-276
++    @Test
++    public void testShouldPassIfTestArtifactsAreIgnored() throws Exception {
++        dependencyTree.addDependency(library1_10);
++        
++        library2_10.setScope("test");
++        DependencyNode n = new DependencyNode(library2_10);
++        n.addChild(new DependencyNode(library1_20));
++        dependencyTree.addDependency(n);
++                
++        rule.setIgnoreDependencyScopes(Arrays.asList("test"));
++        TestEnforcerRuleUtils.execute(rule, helper, false);
++    }
++    
++    // MENFORCER-276
++    @Test
++    public void testShouldFailIfWrongScopeIsIgnored() throws Exception {
++        testShouldPassIfTestArtifactsAreIgnored();   
++        rule.setIgnoreDependencyScopes(Arrays.asList("provided"));
++        TestEnforcerRuleUtils.execute(rule, helper, true);
++    }
++    
++    // TODO: make it a generic class
++    private static final class MockDependencyTreeBuilder implements DependencyTreeBuilder {
++
++        List<DependencyNode> dependencies = new ArrayList<DependencyNode>();    
++       
++        public void addDependency(DependencyNode node) {
++            dependencies.add(node);
++        }
++        
++        public void addDependency(Artifact artifact) {
++            dependencies.add(new DependencyNode(artifact));
++        }
++        
++        @Override
++        public DependencyNode buildDependencyTree(MavenProject project, ArtifactRepository repository, 
++                ArtifactFactory factory, ArtifactMetadataSource metadataSource, ArtifactFilter filter, 
++                ArtifactCollector collector) throws DependencyTreeBuilderException {
++            DependencyNode root = new DependencyNode(project.getArtifact());
++            for (DependencyNode child : dependencies) {
++                root.addChild(child);
++            }
++            return root;
++        }
++        
++        @Override
++        public DependencyTree buildDependencyTree(MavenProject project, ArtifactRepository repository, 
++                ArtifactFactory factory, ArtifactMetadataSource metadataSource, 
++                ArtifactCollector collector) throws DependencyTreeBuilderException {
++            throw new UnsupportedOperationException("Not supported yet.");
++        }
++
++
++        @Override
++        public DependencyNode buildDependencyTree(MavenProject project) throws DependencyTreeBuilderException {
++            throw new UnsupportedOperationException("Not supported yet.");
++        }
++
++        @Override
++        public DependencyNode buildDependencyTree(MavenProject arg0, ArtifactRepository arg1, ArtifactFilter arg2) throws DependencyTreeBuilderException {
++            throw new UnsupportedOperationException("Not supported yet.");
++        }
++        
++    }
++}
+diff --git a/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/invoker.properties b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/invoker.properties
+new file mode 100644
+index 0000000..c98ac4c
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/invoker.properties
+@@ -0,0 +1,18 @@
++# Licensed to the Apache Software Foundation (ASF) under one
++# or more contributor license agreements.  See the NOTICE file
++# distributed with this work for additional information
++# regarding copyright ownership.  The ASF licenses this file
++# to you under the Apache License, Version 2.0 (the
++# "License"); you may not use this file except in compliance
++# with the License.  You may obtain a copy of the License at
++#
++#  http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing,
++# software distributed under the License is distributed on an
++# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++# KIND, either express or implied.  See the License for the
++# specific language governing permissions and limitations
++# under the License.
++
++invoker.buildResult=failure
+\ No newline at end of file
+diff --git a/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/module/pom.xml b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/module/pom.xml
+new file mode 100644
+index 0000000..6d2c1bb
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/module/pom.xml
+@@ -0,0 +1,30 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++  * Licensed to the Apache Software Foundation (ASF) under one
++  * or more contributor license agreements.  See the NOTICE file
++  * distributed with this work for additional information
++  * regarding copyright ownership.  The ASF licenses this file
++  * to you under the Apache License, Version 2.0 (the
++  * "License"); you may not use this file except in compliance
++  * with the License.  You may obtain a copy of the License at
++  *
++  * http://www.apache.org/licenses/LICENSE-2.0
++  *
++  * Unless required by applicable law or agreed to in writing,
++  * software distributed under the License is distributed on an
++  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++  * KIND, either express or implied.  See the License for the
++  * specific language governing permissions and limitations
++  * under the License. 
++  *
++-->
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++  <parent>
++    <groupId>test</groupId>
++    <artifactId>TestParent</artifactId>
++    <version>1.0-SNAPSHOT</version>
++  </parent>
++  <artifactId>TestModule</artifactId>
++  <version>1.1-SNAPSHOT</version>
++</project>
+diff --git a/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/pom.xml b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/pom.xml
+new file mode 100644
+index 0000000..307987a
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/pom.xml
+@@ -0,0 +1,63 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++  * Licensed to the Apache Software Foundation (ASF) under one
++  * or more contributor license agreements.  See the NOTICE file
++  * distributed with this work for additional information
++  * regarding copyright ownership.  The ASF licenses this file
++  * to you under the Apache License, Version 2.0 (the
++  * "License"); you may not use this file except in compliance
++  * with the License.  You may obtain a copy of the License at
++  *
++  * http://www.apache.org/licenses/LICENSE-2.0
++  *
++  * Unless required by applicable law or agreed to in writing,
++  * software distributed under the License is distributed on an
++  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++  * KIND, either express or implied.  See the License for the
++  * specific language governing permissions and limitations
++  * under the License. 
++  *
++-->
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++  <groupId>org.apache.maven.plugins.enforcer.its</groupId>
++  <artifactId>menforcer276/artifactId>
++  <version>1.0-SNAPSHOT</version>
++  <packaging>jar</packaging>
++  <dependencies>
++    <dependency>
++      <groupId>org.apache.maven.plugins.enforcer.its</groupId>
++      <artifactId>menforcer128_api</artifactId>
++      <version>1.4.0</version>
++    </dependency>
++    <dependency>
++      <groupId>org.apache.maven.plugins.enforcer.its</groupId>
++      <artifactId>menforcer128_classic</artifactId>
++      <version>0.9.9</version>
++      <scope>test</scope>
++      <!-- Depends on org.apache.maven.plugins.enforcer.its:menforcer128_api:1.5.0 -->
++    </dependency>
++  </dependencies>
++  <build>
++    <plugins>
++      <plugin>
++        <groupId>org.apache.maven.plugins</groupId>
++        <artifactId>maven-enforcer-plugin</artifactId>
++        <version>@project.version@</version>
++        <executions>
++          <execution>
++            <id>enforce</id>
++            <configuration>
++              <rules>
++                <RequireUpperBoundDeps/>
++              </rules>
++            </configuration>
++            <goals>
++              <goal>enforce</goal>
++            </goals>
++          </execution>
++        </executions>
++      </plugin>
++    </plugins>
++  </build>
++</project>
+diff --git a/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/verify.groovy b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/verify.groovy
+new file mode 100644
+index 0000000..38bb648
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_failure/verify.groovy
+@@ -0,0 +1,32 @@
++/*
++ * Licensed to the Apache Software Foundation (ASF) under one
++ * or more contributor license agreements.  See the NOTICE file
++ * distributed with this work for additional information
++ * regarding copyright ownership.  The ASF licenses this file
++ * to you under the Apache License, Version 2.0 (the
++ * "License"); you may not use this file except in compliance
++ * with the License.  You may obtain a copy of the License at
++ *
++ *   http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing,
++ * software distributed under the License is distributed on an
++ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++ * KIND, either express or implied.  See the License for the
++ * specific language governing permissions and limitations
++ * under the License.
++ */
++def LS = System.getProperty( "line.separator" )
++File buildLog = new File( basedir, 'build.log' )
++
++assert buildLog.text.contains( 'Rule 0: org.apache.maven.plugins.enforcer.RequireUpperBoundDeps failed with message:' )
++def message = 
++'Require upper bound dependencies error for org.apache.maven.plugins.enforcer.its:menforcer128_api:1.4.0 paths to dependency are:'+LS+
++'+-org.apache.maven.plugins.enforcer.its:menforcer128:1.0-SNAPSHOT'+LS+
++'  +-org.apache.maven.plugins.enforcer.its:menforcer128_api:1.4.0'+LS+
++'and'+LS+
++'+-org.apache.maven.plugins.enforcer.its:menforcer128:1.0-SNAPSHOT'+LS+
++'  +-org.apache.maven.plugins.enforcer.its:menforcer128_classic:0.9.9'+LS+
++'    +-org.apache.maven.plugins.enforcer.its:menforcer128_api:1.5.0'+LS
++assert buildLog.text.contains( message )
++
+diff --git a/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_ignored/module/pom.xml b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_ignored/module/pom.xml
+new file mode 100644
+index 0000000..6d2c1bb
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_ignored/module/pom.xml
+@@ -0,0 +1,30 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++  * Licensed to the Apache Software Foundation (ASF) under one
++  * or more contributor license agreements.  See the NOTICE file
++  * distributed with this work for additional information
++  * regarding copyright ownership.  The ASF licenses this file
++  * to you under the Apache License, Version 2.0 (the
++  * "License"); you may not use this file except in compliance
++  * with the License.  You may obtain a copy of the License at
++  *
++  * http://www.apache.org/licenses/LICENSE-2.0
++  *
++  * Unless required by applicable law or agreed to in writing,
++  * software distributed under the License is distributed on an
++  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++  * KIND, either express or implied.  See the License for the
++  * specific language governing permissions and limitations
++  * under the License. 
++  *
++-->
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++  <parent>
++    <groupId>test</groupId>
++    <artifactId>TestParent</artifactId>
++    <version>1.0-SNAPSHOT</version>
++  </parent>
++  <artifactId>TestModule</artifactId>
++  <version>1.1-SNAPSHOT</version>
++</project>
+diff --git a/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_ignored/pom.xml b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_ignored/pom.xml
+new file mode 100644
+index 0000000..dc0aa79
+--- /dev/null
++++ b/maven-enforcer-plugin/src/it/projects/require-upper-bound-test-deps_ignored/pom.xml
+@@ -0,0 +1,67 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++  * Licensed to the Apache Software Foundation (ASF) under one
++  * or more contributor license agreements.  See the NOTICE file
++  * distributed with this work for additional information
++  * regarding copyright ownership.  The ASF licenses this file
++  * to you under the Apache License, Version 2.0 (the
++  * "License"); you may not use this file except in compliance
++  * with the License.  You may obtain a copy of the License at
++  *
++  * http://www.apache.org/licenses/LICENSE-2.0
++  *
++  * Unless required by applicable law or agreed to in writing,
++  * software distributed under the License is distributed on an
++  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++  * KIND, either express or implied.  See the License for the
++  * specific language governing permissions and limitations
++  * under the License. 
++  *
++-->
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++  <groupId>org.apache.maven.plugins.enforcer.its</groupId>
++  <artifactId>menforcer276</artifactId>
++  <version>1.0-SNAPSHOT</version>
++  <packaging>jar</packaging>
++  <dependencies>
++    <dependency>
++      <groupId>org.apache.maven.plugins.enforcer.its</groupId>
++      <artifactId>menforcer128_api</artifactId>
++      <version>1.4.0</version>
++    </dependency>
++    <dependency>
++      <groupId>org.apache.maven.plugins.enforcer.its</groupId>
++      <artifactId>menforcer128_classic</artifactId>
++      <version>0.9.9</version>
++      <scope>test</scope>
++      <!-- Depends on org.apache.maven.plugins.enforcer.its:menforcer128_api:1.5.0 -->
++    </dependency>
++  </dependencies>
++  <build>
++    <plugins>
++      <plugin>
++        <groupId>org.apache.maven.plugins</groupId>
++        <artifactId>maven-enforcer-plugin</artifactId>
++        <version>@project.version@</version>
++        <executions>
++          <execution>
++            <id>enforce</id>
++            <configuration>
++              <rules>
++                <requireUpperBoundDeps>
++                  <ignoreDependencyScopes>
++                    <scope>test</scope>
++                  </ignoreDependencyScopes>
++                </requireUpperBoundDeps>
++              </rules>
++            </configuration>
++            <goals>
++              <goal>enforce</goal>
++            </goals>
++          </execution>
++        </executions>
++      </plugin>
++    </plugins>
++  </build>
++</project>
+
+
+ 
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124340-archive-asf-public=cust-asf.ponee.io@maven.apache.org Thu Oct 26 07:41:43 2017
+Return-Path: <dev-return-124340-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 1EAD31609E8
+	for <archive-asf-public@cust-asf.ponee.io>; Thu, 26 Oct 2017 09:41:43 +0200 (CEST)
+Received: (qmail 26537 invoked by uid 500); 26 Oct 2017 07:41:43 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 26524 invoked by uid 99); 26 Oct 2017 07:41:43 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Thu, 26 Oct 2017 07:41:43 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] asfgit closed pull request #4: Update to ASM5 opscode.
+Message-ID: <150900370255.2261.4482031841526989336.gitbox@gitbox.apache.org>
+archived-at: Thu, 26 Oct 2017 07:41:44 -0000
+
+asfgit closed pull request #4: Update to ASM5 opscode.
+URL: https://github.com/apache/maven-plugin-tools/pull/4
+ 
+ 
+   
+
+This is a PR merged from a forked repository.
+As GitHub hides the original diff on merge, it is displayed below for
+the sake of provenance:
+
+As this is a foreign pull request (from a fork), the diff is supplied
+below (as it won't show otherwise due to GitHub magic):
+
+diff --git a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoAnnotationVisitor.java b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoAnnotationVisitor.java
+index 2993553d..e241987e 100644
+--- a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoAnnotationVisitor.java
++++ b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoAnnotationVisitor.java
+@@ -41,7 +41,7 @@
+ 
+     MojoAnnotationVisitor( Logger logger, String annotationClassName )
+     {
+-        super( Opcodes.ASM4 );
++        super( Opcodes.ASM5 );
+         this.logger = logger;
+         this.annotationClassName = annotationClassName;
+     }
+diff --git a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoClassVisitor.java b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoClassVisitor.java
+index f2333d4b..cbedfecd 100644
+--- a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoClassVisitor.java
++++ b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoClassVisitor.java
+@@ -53,7 +53,7 @@
+ 
+     public MojoClassVisitor( Logger logger )
+     {
+-        super( Opcodes.ASM4 );
++        super( Opcodes.ASM5 );
+         this.logger = logger;
+     }
+ 
+diff --git a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoFieldVisitor.java b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoFieldVisitor.java
+index 4a61a01e..783cbcbf 100644
+--- a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoFieldVisitor.java
++++ b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/annotations/scanner/visitors/MojoFieldVisitor.java
+@@ -44,7 +44,7 @@
+ 
+     MojoFieldVisitor( Logger logger, String fieldName, String className )
+     {
+-        super( Opcodes.ASM4 );
++        super( Opcodes.ASM5 );
+         this.logger = logger;
+         this.fieldName = fieldName;
+         this.className = className;
+
+
+ 
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124342-archive-asf-public=cust-asf.ponee.io@maven.apache.org Thu Oct 26 07:41:44 2017
+Return-Path: <dev-return-124342-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id F1E871609E8
+	for <archive-asf-public@cust-asf.ponee.io>; Thu, 26 Oct 2017 09:41:44 +0200 (CEST)
+Received: (qmail 27357 invoked by uid 500); 26 Oct 2017 07:41:43 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 27288 invoked by uid 99); 26 Oct 2017 07:41:43 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Thu, 26 Oct 2017 07:41:43 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] asfgit closed pull request #6: For Groovy/Scala Mojos: Allow Mojo documentation in annotations, too.
+Message-ID: <150900370283.2267.15668741730198687238.gitbox@gitbox.apache.org>
+archived-at: Thu, 26 Oct 2017 07:41:45 -0000
+
+asfgit closed pull request #6: For Groovy/Scala Mojos: Allow Mojo documentation in annotations, too.
+URL: https://github.com/apache/maven-plugin-tools/pull/6
+ 
+ 
+   
+
+This is a PR merged from a forked repository.
+As GitHub hides the original diff on merge, it is displayed below for
+the sake of provenance:
+
+As this is a foreign pull request (from a fork), the diff is supplied
+below (as it won't show otherwise due to GitHub magic):
+
+diff --git a/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Mojo.java b/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Mojo.java
+index e442310f..5a5d8d8c 100644
+--- a/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Mojo.java
++++ b/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Mojo.java
+@@ -117,4 +117,44 @@
+      * @return is thread safe
+      */
+     boolean threadSafe() default false;
++
++    /**
++     * Description for this Mojo. Has the same format as a Javadoc comment body (that is, HTML with Javadoc inline
++     * tags).
++     *
++     * <p>Ordinarily, this information is taken from Javadoc comments. This annotation is used when documenting a Maven
++     * plugin that is written in a language other than Java, but which supports Java annotations, such as Groovy or
++     * Scala.</p>
++     *
++     * @since 3.5
++     */
++    String description() default "";
++
++    /**
++     * The first version of the plugin when this Mojo was added.
++     *
++     * <p>Ordinarily, this information is taken from Javadoc comments. This annotation is used when documenting a Maven
++     * plugin that is written in a language other than Java, but which supports Java annotations, such as Groovy or
++     * Scala.</p>
++     *
++     * @since 3.5
++     */
++    String since() default "";
++
++    /**
++     * The reason why this Mojo is deprecated.
++     *
++     * <p>If this is given, then the Mojo should also be annotated with {@code @}{@link Deprecated}, like so:</p>
++     *
++     * <pre><code>@Deprecated
++&#64;Mojo(..., deprecated = "this Mojo is no longer used")
++public class ExampleMojo extends AbstractMojo { ... }</code></pre>
++     *
++     * <p>Ordinarily, this information is taken from Javadoc comments. This annotation is used when documenting a Maven
++     * plugin that is written in a language other than Java, but which supports Java annotations, such as Groovy or
++     * Scala.</p>
++     *
++     * @since 3.5
++     */
++    String deprecated() default "";
+ }
+diff --git a/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Parameter.java b/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Parameter.java
+index ec9dbcf6..f364e945 100644
+--- a/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Parameter.java
++++ b/maven-plugin-annotations/src/main/java/org/apache/maven/plugins/annotations/Parameter.java
+@@ -85,4 +85,44 @@
+      * @return <code>true</code> if the user should not be allowed to configure the parameter directly
+      */
+     boolean readonly() default false;
++
++    /**
++     * Description for this parameter. Has the same format as a Javadoc comment body (that is, HTML with Javadoc inline
++     * tags).
++     *
++     * <p>Ordinarily, this information is taken from Javadoc comments. This annotation is used when documenting a Maven
++     * plugin that is written in a language other than Java, but which supports Java annotations, such as Groovy or
++     * Scala.</p>
++     *
++     * @since 3.5
++     */
++    String description() default "";
++
++    /**
++     * The first version of the plugin when this parameter was added.
++     *
++     * <p>Ordinarily, this information is taken from Javadoc comments. This annotation is used when documenting a Maven
++     * plugin that is written in a language other than Java, but which supports Java annotations, such as Groovy or
++     * Scala.</p>
++     *
++     * @since 3.5
++     */
++    String since() default "";
++
++    /**
++     * The reason why this parameter is deprecated.
++     *
++     * <p>If this is given, then the parameter should also be annotated with {@code @}{@link Deprecated}, like so:</p>
++     *
++     * <pre><code>@Deprecated
++&#64;Parameter(..., deprecated = "this parameter is no longer used")
++private String oldParameterThatNowDoesNothing;</code></pre>
++     *
++     * <p>Ordinarily, this information is taken from Javadoc comments. This annotation is used when documenting a Maven
++     * plugin that is written in a language other than Java, but which supports Java annotations, such as Groovy or
++     * Scala.</p>
++     *
++     * @since 3.5
++     */
++    String deprecated() default "";
+ }
+diff --git a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/MojoAnnotationContent.java b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/MojoAnnotationContent.java
+index 33104cb8..663435ff 100644
+--- a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/MojoAnnotationContent.java
++++ b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/MojoAnnotationContent.java
+@@ -207,6 +207,36 @@ public void name( String name )
+         this.name = name;
+     }
+ 
++    public String deprecated()
++    {
++        return getDeprecated();
++    }
++
++    public void deprecated( String deprecated )
++    {
++        setDeprecated( deprecated );
++    }
++
++    public String description()
++    {
++        return getDescription();
++    }
++
++    public void description( String description )
++    {
++        setDescription( description );
++    }
++
++    public String since()
++    {
++        return getSince();
++    }
++
++    public void since( String since )
++    {
++        setSince( since );
++    }
++
+     @Override
+     public String toString()
+     {
+@@ -226,6 +256,9 @@ public String toString()
+         sb.append( ", inheritByDefault=" ).append( inheritByDefault );
+         sb.append( ", configurator='" ).append( configurator ).append( '\'' );
+         sb.append( ", threadSafe=" ).append( threadSafe );
++        sb.append( ", deprecated='" ).append( deprecated() ).append( '\'' );
++        sb.append( ", description='" ).append( description() ).append( '\'' );
++        sb.append( ", since='" ).append( since() ).append( '\'' );
+         sb.append( '}' );
+         return sb.toString();
+     }
+diff --git a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/ParameterAnnotationContent.java b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/ParameterAnnotationContent.java
+index 919aaa4b..ca8a49fc 100644
+--- a/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/ParameterAnnotationContent.java
++++ b/maven-plugin-tools-annotations/src/main/java/org/apache/maven/tools/plugin/extractor/annotations/datamodel/ParameterAnnotationContent.java
+@@ -63,6 +63,16 @@ public ParameterAnnotationContent( String fieldName, String alias, String proper
+         this.readonly = readonly;
+     }
+ 
++    public ParameterAnnotationContent( String fieldName, String alias, String property, String defaultValue,
++                                       boolean required, boolean readonly, String className,
++                                       String deprecated, String description, String since )
++    {
++        this( fieldName, alias, property, defaultValue, required, readonly, className );
++        deprecated( deprecated );
++        description( description );
++        since( since );
++    }
++
+     public String name()
+     {
+         return name;
+@@ -123,6 +133,36 @@ public void readonly( boolean readonly )
+         this.readonly = readonly;
+     }
+ 
++    public String deprecated()
++    {
++        return getDeprecated();
++    }
++
++    public void deprecated( String deprecated )
++    {
++        setDeprecated( deprecated );
++    }
++
++    public String description()
++    {
++        return getDescription();
++    }
++
++    public void description( String description )
++    {
++        setDescription( description );
++    }
++
++    public String since()
++    {
++        return getSince();
++    }
++
++    public void since( String since )
++    {
++        setSince( since );
++    }
++
+     public Class<? extends Annotation> annotationType()
+     {
+         return null;
+@@ -150,6 +190,9 @@ public String toString()
+         sb.append( ", defaultValue='" ).append( defaultValue ).append( '\'' );
+         sb.append( ", required=" ).append( required );
+         sb.append( ", readonly=" ).append( readonly );
++        sb.append( ", deprecated='" ).append( deprecated() ).append( '\'' );
++        sb.append( ", description='" ).append( description() ).append( '\'' );
++        sb.append( ", since='" ).append( since() ).append( '\'' );
+         sb.append( '}' );
+         return sb.toString();
+     }
+@@ -194,6 +237,18 @@ public boolean equals( Object o )
+         {
+             return false;
+         }
++        if ( deprecated() != null ? !deprecated().equals( that.deprecated() ) : that.deprecated() != null )
++        {
++            return false;
++        }
++        if ( description() != null ? !description().equals( that.description() ) : that.description() != null )
++        {
++            return false;
++        }
++        if ( since() != null ? !since().equals( that.since() ) : that.since() != null )
++        {
++            return false;
++        }
+ 
+         return true;
+     }
+@@ -207,6 +262,9 @@ public int hashCode()
+         result = 31 * result + ( defaultValue != null ? defaultValue.hashCode() : 0 );
+         result = 31 * result + ( required ? 1 : 0 );
+         result = 31 * result + ( readonly ? 1 : 0 );
++        result = 31 * result + ( deprecated() != null ? deprecated().hashCode() : 0 );
++        result = 31 * result + ( description() != null ? description().hashCode() : 0 );
++        result = 31 * result + ( since() != null ? since().hashCode() : 0 );
+         return result;
+     }
+ }
+diff --git a/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/FooMojo.java b/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/FooMojo.java
+index 673f8b1a..ee8527b2 100644
+--- a/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/FooMojo.java
++++ b/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/FooMojo.java
+@@ -33,7 +33,7 @@
+ /**
+  * @author Olivier Lamy
+  */
+-@Mojo( name = "foo", defaultPhase = LifecyclePhase.COMPILE, threadSafe = true )
++@Mojo( name = "foo", defaultPhase = LifecyclePhase.COMPILE, threadSafe = true, description = "This is a description.", since = "3.5", deprecated = "because I said so" )
+ @Execute( goal = "compiler", lifecycle = "my-lifecycle", phase = LifecyclePhase.PACKAGE )
+ public class FooMojo
+     extends AbstractMojo
+@@ -52,6 +52,10 @@
+     @Parameter( property = "thebeer", defaultValue = "coolbeer" )
+     protected String beer;
+ 
++    @Parameter( description = "wine for french folks", since = "forever ago", deprecated = "beer is better" )
++    @Deprecated
++    protected String wine;
++
+     /**
+      * Plexus compiler manager.
+      */
+diff --git a/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/TestAnnotationsReader.java b/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/TestAnnotationsReader.java
+index 17a24bfd..12359bee 100644
+--- a/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/TestAnnotationsReader.java
++++ b/maven-plugin-tools-annotations/src/test/java/org/apache/maven/tools/plugin/extractor/annotations/TestAnnotationsReader.java
+@@ -71,6 +71,9 @@ public void testReadMojoClass()
+         assertEquals( true, mojo.threadSafe() );
+         assertEquals( false, mojo.aggregator() );
+         assertEquals( LifecyclePhase.COMPILE, mojo.defaultPhase() );
++        assertEquals( "This is a description.", mojo.description() );
++        assertEquals( "3.5", mojo.since() );
++        assertEquals( "because I said so", mojo.deprecated() );
+ 
+         Execute execute = mojoAnnotatedClass.getExecute();
+ 
+@@ -82,9 +85,12 @@ public void testReadMojoClass()
+         Assertions.assertThat( components ).isNotNull().isNotEmpty().hasSize( 2 );
+ 
+         Collection<ParameterAnnotationContent> parameters = mojoAnnotatedClass.getParameters().values();
+-        Assertions.assertThat( parameters ).isNotNull().isNotEmpty().hasSize( 2 ).contains(
++        Assertions.assertThat( parameters ).isNotNull().isNotEmpty().hasSize( 3 ).contains(
+             new ParameterAnnotationContent( "bar", null, "thebar", "coolbar", true, false, String.class.getName() ),
+             new ParameterAnnotationContent( "beer", null, "thebeer", "coolbeer", false, false,
+-                                            String.class.getName() ) );
++                                            String.class.getName() ),
++            new ParameterAnnotationContent( "wine", null, null, null, false, false,
++                                            String.class.getName(), "beer is better", "wine for french folks",
++                                            "forever ago" ) );
+     }
+ }
+
+
+ 
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124353-archive-asf-public=cust-asf.ponee.io@maven.apache.org Fri Oct 27 02:33:38 2017
+Return-Path: <dev-return-124353-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 1B8BA1609E5
+	for <archive-asf-public@cust-asf.ponee.io>; Fri, 27 Oct 2017 04:33:38 +0200 (CEST)
+Received: (qmail 37730 invoked by uid 500); 27 Oct 2017 02:33:38 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 37719 invoked by uid 99); 27 Oct 2017 02:33:38 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 27 Oct 2017 02:33:38 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] olamy commented on issue #19: Fix for MRELEASE-835: Automatically resolve snapshot dependencies in release:prepare
+Message-ID: <150907161747.17428.6915601202360371460.gitbox@gitbox.apache.org>
+archived-at: Fri, 27 Oct 2017 02:33:39 -0000
+
+olamy commented on issue #19: Fix for MRELEASE-835: Automatically resolve snapshot dependencies in release:prepare
+URL: https://github.com/apache/maven-release/pull/19#issuecomment-339855892
+ 
+ 
+   @theit I'm happy with this changes. Except the lack of test. Is there anything you can do? A plugin IT test?
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124404-archive-asf-public=cust-asf.ponee.io@maven.apache.org Sat Nov 04 14:33:08 2017
+Return-Path: <dev-return-124404-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 28AFF160BD5
+	for <archive-asf-public@cust-asf.ponee.io>; Sat,  4 Nov 2017 15:33:08 +0100 (CET)
+Received: (qmail 82314 invoked by uid 500); 4 Nov 2017 14:33:07 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 82303 invoked by uid 99); 4 Nov 2017 14:33:07 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Sat, 04 Nov 2017 14:33:07 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] hboutemy commented on issue #27: Fixed wrong page title for Dependency Convergence
+Message-ID: <150980598660.9752.3932007543681134404.gitbox@gitbox.apache.org>
+archived-at: Sat, 04 Nov 2017 14:33:08 -0000
+
+hboutemy commented on issue #27: Fixed wrong page title for Dependency Convergence
+URL: https://github.com/apache/maven-enforcer/pull/27#issuecomment-341901250
+ 
+ 
+   sorry, this was automatically closed when migrating to Git and deleting old trunk branch
+   reopening
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124407-archive-asf-public=cust-asf.ponee.io@maven.apache.org Sat Nov 04 14:41:36 2017
+Return-Path: <dev-return-124407-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 29C60160BE7
+	for <archive-asf-public@cust-asf.ponee.io>; Sat,  4 Nov 2017 15:41:36 +0100 (CET)
+Received: (qmail 92040 invoked by uid 500); 4 Nov 2017 14:41:35 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 91799 invoked by uid 99); 4 Nov 2017 14:41:34 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Sat, 04 Nov 2017 14:41:34 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] hboutemy closed pull request #27: Fixed wrong page title for Dependency Convergence
+Message-ID: <150980649445.13005.1437023697550694082.gitbox@gitbox.apache.org>
+archived-at: Sat, 04 Nov 2017 14:41:36 -0000
+
+hboutemy closed pull request #27: Fixed wrong page title for Dependency Convergence
+URL: https://github.com/apache/maven-enforcer/pull/27
+ 
+ 
+   
+
+This is a PR merged from a forked repository.
+As GitHub hides the original diff on merge, it is displayed below for
+the sake of provenance:
+
+As this is a foreign pull request (from a fork), the diff is supplied
+below (as it won't show otherwise due to GitHub magic):
+
+diff --git a/enforcer-rules/src/site/apt/dependencyConvergence.apt.vm b/enforcer-rules/src/site/apt/dependencyConvergence.apt.vm
+index 890814a..bc7dcf9 100644
+--- a/enforcer-rules/src/site/apt/dependencyConvergence.apt.vm
++++ b/enforcer-rules/src/site/apt/dependencyConvergence.apt.vm
+@@ -16,7 +16,7 @@
+  ~~ under the License.
+ 
+  -----
+- Comparing against a specific artifact
++ Dependency Convergence
+  -----
+  -----
+  2008-09-13
+
+
+ 
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+
+From dev-return-124501-archive-asf-public=cust-asf.ponee.io@maven.apache.org Fri Nov 17 08:40:36 2017
+Return-Path: <dev-return-124501-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 544B0160BF8
+	for <archive-asf-public@cust-asf.ponee.io>; Fri, 17 Nov 2017 09:40:36 +0100 (CET)
+Received: (qmail 13228 invoked by uid 500); 17 Nov 2017 08:40:35 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 13217 invoked by uid 99); 17 Nov 2017 08:40:35 -0000
+Received: from pnap-us-west-generic-nat.apache.org (HELO spamd3-us-west.apache.org) (209.188.14.142)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 17 Nov 2017 08:40:35 +0000
+Received: from localhost (localhost [127.0.0.1])
+	by spamd3-us-west.apache.org (ASF Mail Server at spamd3-us-west.apache.org) with ESMTP id 0478C18088F
+	for <dev@maven.apache.org>; Fri, 17 Nov 2017 08:40:33 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at spamd3-us-west.apache.org
+X-Spam-Flag: NO
+X-Spam-Score: -1
+X-Spam-Level: 
+X-Spam-Status: No, score=-1 tagged_above=-999 required=6.31
+	tests=[KAM_ASCII_DIVIDERS=0.8, KAM_LAZY_DOMAIN_SECURITY=1,
+	RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-2.8] autolearn=disabled
+Received: from mx1-lw-us.apache.org ([10.40.0.8])
+	by localhost (spamd3-us-west.apache.org [10.40.0.10]) (amavisd-new, port 10024)
+	with ESMTP id QNrCLGJBrxBw for <dev@maven.apache.org>;
+	Fri, 17 Nov 2017 08:40:31 +0000 (UTC)
+Received: from smtp.smtpout.orange.fr (smtp03.smtpout.orange.fr [80.12.242.125])
+	by mx1-lw-us.apache.org (ASF Mail Server at mx1-lw-us.apache.org) with ESMTPS id 796F95F569
+	for <dev@maven.apache.org>; Fri, 17 Nov 2017 08:40:29 +0000 (UTC)
+Received: from giga.localnet ([86.238.16.93])
+	by mwinf5d50 with ME
+	id awgN1w00K20Ufdy03wgNhg; Fri, 17 Nov 2017 09:40:22 +0100
+X-ME-Helo: giga.localnet
+X-ME-Date: Fri, 17 Nov 2017 09:40:22 +0100
+X-ME-IP: 86.238.16.93
+From: =?ISO-8859-1?Q?Herv=E9?= BOUTEMY <herve.boutemy@free.fr>
+To: Maven Developers List <dev@maven.apache.org>
+Subject: Re: Maven resolver branch consolidation
+Date: Fri, 17 Nov 2017 09:40:22 +0100
+Message-ID: <2567878.8ANxGostfX@giga>
+In-Reply-To: <20171116171315.3663629C0081@dd17332.kasserver.com>
+References: <20171109053551.957D429C50D1@dd17332.kasserver.com> <1640357.5XWmYONbEb@giga> <20171116171315.3663629C0081@dd17332.kasserver.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="nextPart23989684.4Xbeelhfra"
+Content-Transfer-Encoding: 7Bit
+archived-at: Fri, 17 Nov 2017 08:40:37 -0000
+
+--nextPart23989684.4Xbeelhfra
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
+
+on the second option, I was ready to just answer "not possible", but decide=
+d I=20
+could try at high level before answering...
+
+I took Maven core dependency tree [1], picked green color as the definition=
+ of=20
+Maven Artifact Resolver, put maven-resolver-provider in green + settings=20
+builder (since used by resolver ant tasks: that's a detail I didn't put in=
+=20
+latest resolver dependency tree)
+Then I extended green to every transitive dependency to have an independent=
+=20
+releasable reactor
+
+You'll find as a result the attached image.
+
+Analysis:
+=2D this splits Maven core in 2 parts: lower part on dependency resolution,=
+=20
+higher part on build
+=2D settings.xml and pom.xml are in dependency resolution
+
+Reaction: it could be for Maven 5 or 6, when consumer pom is strictly separ=
+ate=20
+from build pom...
+
+Regards,
+
+Herv=E9
+
+[1] http://maven.apache.org/ref/3.5.2/
+
+Le jeudi 16 novembre 2017, 18:13:15 CET Manfred Moser a =E9crit :
+> Thanks for the explanation and details Herve. Seems to be that to do this
+> cleanly we have to break the circle. From my limited knowledge there are
+> two ways to do that.
+>=20
+> 1. As stephen suggested.. get the resolver into maven core tree. That mak=
+es
+> core bigger again and ties the two projects into one release cycle.
+> Feasible but I am not a fan.
+>=20
+> 2. I am not sure if possible but .. could we get the maven resolver provi=
+der
+> out of maven core and into the resolver project and have it all together =
+in
+> there?
+>=20
+> In either case .. both of those seem rather large tasks so I will definit=
+ely
+> go ahead with demo branch merge first. I just have to redo the work I did
+> without the ant tasks in the tree. Stay tuned on that..
+>=20
+> Manfred
+>=20
+> Herv=E9 BOUTEMY wrote on 2017-11-16 05:49:
+> > feasible, but I really don't like it: separation is good.
+> >=20
+> > seriously, just merge demos and let ant-tasks separate, and we have a
+> > pretty good compromise on every aspect
+> > (or even drop ant tasks if really this is causing us too much headache.=
+=2E.)
+> >=20
+> > Regards,
+> >=20
+> > Herv=E9
+> >=20
+> > Le jeudi 16 novembre 2017, 10:03:07 CET Stephen Connolly a =E9crit :
+> >> On Thu 16 Nov 2017 at 07:51, Herv=E9 BOUTEMY <herve.boutemy@free.fr> w=
+rote:
+> >> > I just pushed an update of dependencies image that shows the external
+> >> > maven-
+> >> > resolver-provider (in yellow) inside the reactor dependency graph (in
+> >> > blue)
+> >> >=20
+> >> > That shows the chicken and egg issue on releasing we'll have on API
+> >> > breaking
+> >> > change. People always building from source (like Debian) will have t=
+he
+> >> > issue
+> >> > also.
+> >> >=20
+> >> > For demos, which are not really published during the release (just as
+> >> > documentation), disabling the module in the build when necessary is
+> >> > sufficient,
+> >> > won't change many things. For ant tasks, disabling the module will n=
+ot
+> >> > publish
+> >> > the artifact: this will have a visible impact.
+> >>=20
+> >> Should we just bite the bullet and bring resolver in-tree as modules in
+> >> maven core... leaving demos and ant tasks here?
+> >>=20
+> >> > Regards,
+> >> >=20
+> >> > Herv=E9
+> >> >=20
+> >> > Le mercredi 15 novembre 2017, 23:05:14 CET Herv=E9 BOUTEMY a =E9crit=
+ :
+> >> > > it seems I have not been clear: I'll try to explain better
+> >> > >=20
+> >> > > 1. maven-resolver-ant-tasks depends on maven-resolver-provider (fr=
+om
+> >> >=20
+> >> > Maven
+> >> >=20
+> >> > > core)
+> >> > > 2. maven-resolver-provider (then Maven core) depends on
+> >> > > maven-resolver
+> >> > >=20
+> >> > > if we put maven-resolver-ant-tasks in the same reactor than
+> >> >=20
+> >> > maven-resolver,
+> >> >=20
+> >> > > we can't release any maven-resolver API change that breaks
+> >> >=20
+> >> > maven-resolver-
+> >> >=20
+> >> > > provider
+> >> > >=20
+> >> > > example: if we move maven-resolver code to org.apache.maven java
+> >> > > package
+> >> >=20
+> >> > in
+> >> >=20
+> >> > > maven-resolver 2.0.0-SNAPSHOT, we need maven-resolver-provider
+> >> > > 4.0.0-SNAPSHOT that uses maven-resolver 2.0.0-SNAPSHOT with this n=
+ew
+> >> > > java
+> >> > > package. Then try to release anything: you can't, unless you don't
+> >> > > try
+> >> > > to
+> >> > > release maven- resolver-ant-tasks
+> >> > >=20
+> >> > > (the consequence on version consistency is another way to describe
+> >> > > the
+> >> > > issue, but that is more subtle, then I chose to describe the most
+> >> > > visible
+> >> > > issue, with API breaking change)
+> >> > >=20
+> >> > > IMHO, another consequence could be: maven-resolver-ant-tasks would
+> >> >=20
+> >> > perhaps
+> >> >=20
+> >> > > better be versionned like maven-resolver-provider
+> >> > >=20
+> >> > >=20
+> >> > > Merging resolver-demos is really the great big idea: with that mer=
+ge,
+> >> > > modifying maven-rresolver can immediately be tested with demos:
+> >> > > that'll
+> >> >=20
+> >> > be
+> >> >=20
+> >> > > so much easier to make changes to maven-resolver code!
+> >> > >=20
+> >> > > Regards,
+> >> > >=20
+> >> > > Herv=E9
+> >> > >=20
+> >> > > Le mercredi 15 novembre 2017, 09:02:12 CET Michael Osipov a =E9cri=
+t :
+> >> > > > Why -1 on the Ant tasks?
+> >> > > >=20
+> >> > > > Am 2017-11-15 um 00:50 schrieb Herv=E9 BOUTEMY:
+> >> > > > > I answered on the mailing list and on the 2 Jira issues
+> >> > > > > In summary, +1 to merge demos, -1 to merge ant-tasks
+> >> > > > >=20
+> >> > > > > Regards,
+> >> > > > >=20
+> >> > > > > Herv=E9
+> >> > > > >=20
+> >> > > > > Le mardi 14 novembre 2017, 18:19:40 CET Manfred Moser a =E9cri=
+t :
+> >> > > > >> Any feedback or should I just go ahead with the cleanup?
+> >> > > > >>=20
+> >> > > > >> Manfred
+> >> > > > >>=20
+> >> > > > >> Manfred Moser wrote on 2017-11-08 21:35:
+> >> > > > >>> Hi all,
+> >> > > > >>>=20
+> >> > > > >>> I have started and made good progress on getting Maven resol=
+ver
+> >> > > > >>> all
+> >> > > > >>> into
+> >> > > > >>> the master branch instead of having master, demos and ant-ta=
+sks
+> >> > > > >>> in
+> >> > > > >>> separate branches.
+> >> > > > >>>=20
+> >> > > > >>> Details are tracked in
+> >> > > > >>> https://issues.apache.org/jira/browse/MRESOLVER-28
+> >> > > > >>>=20
+> >> > > > >>> All of it is now in a new branch called master-all for you to
+> >> > > > >>> see.
+> >> > > > >>>=20
+> >> > > > >>> I am now wondering what the next steps are. I added what I
+> >> > > > >>> think
+> >> > > > >>> should
+> >> > > > >>> happen next in the issue in a comment and would appreciate a=
+ny
+> >> >=20
+> >> > input
+> >> >=20
+> >> > > > >>> on
+> >> > > > >>> the current setup and next steps.
+> >> > > > >>>=20
+> >> > > > >>> Any help would be appreciated.
+> >> > > > >>>=20
+> >> > > > >>> manfred
+> >> >=20
+> >> > ---------------------------------------------------------------------
+> >> >=20
+> >> > > > >> To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+> >> > > > >> For additional commands, e-mail: dev-help@maven.apache.org
+> >> > > > >=20
+> >> > > > > --------------------------------------------------------------=
+=2D--
+> >> > > > > ---
+> >> > > > > -
+> >> > > > > To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+> >> > > > > For additional commands, e-mail: dev-help@maven.apache.org
+> >> > >=20
+> >> > > ------------------------------------------------------------------=
+=2D--
+> >> > > To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+> >> > > For additional commands, e-mail: dev-help@maven.apache.org
+> >> >=20
+> >> > ---------------------------------------------------------------------
+> >> > To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+> >> > For additional commands, e-mail: dev-help@maven.apache.org
+> >> >=20
+> >> > --
+> >>=20
+> >> Sent from my phone
+> >=20
+> > ---------------------------------------------------------------------
+> > To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+> > For additional commands, e-mail: dev-help@maven.apache.org
+>=20
+> ---------------------------------------------------------------------
+> To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+> For additional commands, e-mail: dev-help@maven.apache.org
+
+
+
+--nextPart23989684.4Xbeelhfra
+Content-Type: text/plain; charset=us-ascii
+
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+--nextPart23989684.4Xbeelhfra--
+
+
+From dev-return-124732-archive-asf-public=cust-asf.ponee.io@maven.apache.org Mon Dec 04 11:39:36 2017
+Return-Path: <dev-return-124732-archive-asf-public=cust-asf.ponee.io@maven.apache.org>
+X-Original-To: archive-asf-public@cust-asf.ponee.io
+Delivered-To: archive-asf-public@cust-asf.ponee.io
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by cust-asf.ponee.io (Postfix) with SMTP id 358C9160BF9
+	for <archive-asf-public@cust-asf.ponee.io>; Mon,  4 Dec 2017 12:39:36 +0100 (CET)
+Received: (qmail 14334 invoked by uid 500); 4 Dec 2017 11:39:35 -0000
+Mailing-List: contact dev-help@maven.apache.org; run by ezmlm
+Precedence: bulk
+List-Unsubscribe: <mailto:dev-unsubscribe@maven.apache.org>
+List-Help: <mailto:dev-help@maven.apache.org>
+List-Post: <mailto:dev@maven.apache.org>
+List-Id: "Maven Developers List" <dev.maven.apache.org>
+Reply-To: "Maven Developers List" <dev@maven.apache.org>
+Delivered-To: mailing list dev@maven.apache.org
+Received: (qmail 14323 invoked by uid 99); 4 Dec 2017 11:39:35 -0000
+Received: from ec2-52-202-80-70.compute-1.amazonaws.com (HELO gitbox.apache.org) (52.202.80.70)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 04 Dec 2017 11:39:35 +0000
+From: GitBox <git@apache.org>
+To: dev@maven.apache.org
+Subject: [GitHub] slachiewicz commented on issue #6: [DOXIA-566] Upgrade dependences and plugin versions
+Message-ID: <151238757459.14520.7532165007668224803.gitbox@gitbox.apache.org>
+archived-at: Mon, 04 Dec 2017 11:39:36 -0000
+
+slachiewicz commented on issue #6: [DOXIA-566] Upgrade dependences and plugin versions
+URL: https://github.com/apache/maven-doxia/pull/6#issuecomment-348937905
+ 
+ 
+   ok, plugin updates removed
+
+----------------------------------------------------------------
+This is an automated message from the Apache Git Service.
+To respond to the message, please log on GitHub and use the
+URL above to go to the specific comment.
+ 
+For queries about this service, please contact Infrastructure at:
+users@infra.apache.org
+
+
+With regards,
+Apache Git Services
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@maven.apache.org
+For additional commands, e-mail: dev-help@maven.apache.org
+
+

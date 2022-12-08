@@ -1,0 +1,12 @@
+# Test that different archives of the same >From escaped email generate the same id
+args:
+  cmd: tests/test-generators.py --generators dkim --mbox corpus/maven-dev-2017-11-124652-*.mbox
+    --rootdir ../pmfoal --generate yaml/maven-dev-2017-11-124652.yml
+generators:
+  corpus/maven-dev-2017-11-124652-listsao.mbox:
+  corpus/maven-dev-2017-11-124652-mailarchivesao.mbox:
+  corpus/maven-dev-2017-11-124652-mboxvm.mbox:
+    dkim:
+    - index: 0
+      message-id: <CAKuVzBSyG-8Bnor7sezCp6z0Cv+Jng0o11HN4hBx10BjWCQnOw@mail.gmail.com>
+      generated: y9lg8tpqvokk64cxqdc9o02xn8cj6hjk

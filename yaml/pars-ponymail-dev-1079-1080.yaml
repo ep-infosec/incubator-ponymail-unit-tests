@@ -1,0 +1,14 @@
+args:
+  parse_html: false
+parsing:
+  # Mail duplicated before arrival at mailing list
+  # should all have same body when parsed
+  corpus/ponymail-dev-1079-mailarchiesao.mbox:
+  corpus/ponymail-dev-1080-mailarchiesao.mbox:
+  corpus/ponymail-dev-1079-mboxvm.mbox:
+  corpus/ponymail-dev-1080-mboxvm.mbox:
+  corpus/ponymail-dev-1080-listsao.mbox:
+  - index: 0
+    message-id: <CAOwvvydHMY2oa8t4m+UWi8N4o+3JgdqSxujqRueP+OoiNW1EQg@mail.gmail.com>
+    body_sha3_256: 15d49d74a176a6b55946193a291e3b862c16734203083517d65b40b39365eccf
+    attachments: []

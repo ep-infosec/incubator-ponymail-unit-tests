@@ -1,0 +1,26 @@
+args:
+  cmd: tests/test-parsing.py --rootdir /x1/pypony/ --mbox corpus/empty_attachment.mbox
+    corpus/empty_body.mbox corpus/no_date.mbox corpus/text_enriched.mbox --generate
+    yaml/parsing-miscellaneous.yaml
+  parse_html: false
+parsing:
+  corpus/empty_attachment.mbox:
+  - index: 0
+    message-id: <004201c2c3a3$82f86e40$160aa8c0@win98>
+    body_sha3_256: a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a
+    attachments: []
+  corpus/empty_body.mbox:
+  - index: 0
+    message-id: <20161117004927.D69A719610@minotaur.apache.org>
+    body_sha3_256: a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a
+    attachments: []
+  corpus/no_date.mbox:
+  - index: 0
+    message-id: ''
+    body_sha3_256: d8e5444ff55847c68aa94019af9cfc2527597f07a80444ea4ca4a96e6de48bc6
+    attachments: []
+  corpus/text_enriched.mbox:
+  - index: 0
+    message-id: <3.0.5.32.20010514152321.0090b230@netgate.emmes.com>
+    body_sha3_256: a8001fbfc118043dc5ddfc4dec185ccd8e6a03505f64adf4ffe5f91ffb66fe48
+    attachments: []

@@ -1,0 +1,78 @@
+args:
+  cmd: tests/test-parsing.py --generate parsing-httpd-users-200606-part.yaml --mbox corpus/httpd-users-200606-part.mbox
+    --rootdir ../ponymail/
+  parse_html: false
+parsing:
+  corpus/httpd-users-200606-part.mbox:
+  - index: 0
+    message-id: <BAY103-F28070ECF509B48E8F10ECEC2910@phx.gbl>
+    body_sha3_256: 944938a5297d49ad4336a818c06e57fff286efdcafdbafbeeac7d3f99b9eef3e
+    v0.10: d134d595e3e80d1c166e5f7a908ad340fe69fd44ddf5a03412e9850de5d88e69
+    foal: d134d595e3e80d1c166e5f7a908ad340fe69fd44ddf5a03412e9850de5d88e69
+    attachments: []
+  - index: 1
+    message-id: <BAY117-F8A51AB1A746DB7C5C868BB4910@phx.gbl>
+    body_sha3_256: 422341bf16df7e41fb3bcafa1a92ccbea9f91ea74632adb2507d68cc7d54af73
+    v0.10: 47157d8e3a2e4207f03931c8b1921faea0ee00badad57f1c5778f72488aff890
+    foal: 47157d8e3a2e4207f03931c8b1921faea0ee00badad57f1c5778f72488aff890
+    attachments: []
+  - index: 2
+    message-id: <BAY103-F36A0C2427095C72D377474C2940@phx.gbl>
+    body_sha3_256: d225cbc5be1ca2be1a8f853970f231b62ec3330f0ee129f8ace48a9311d06d60
+    v0.10: 9e7880d7a364989708efd2def6f8cd6d2ba113f1f147777c59c429d29f2328ca
+    foal: 9e7880d7a364989708efd2def6f8cd6d2ba113f1f147777c59c429d29f2328ca
+    attachments: []
+  - index: 3
+    message-id: <BAY103-F115CA57A21C2C56030731CE2950@phx.gbl>
+    body_sha3_256: e80a63ec4a0351f0164b14e8775365ba09f718a6f890ee6ba1aad8ccb7e0e9ed
+    v0.10: 5ced4ee572e501479801915b353c36e62d56a2afe9b3af9e62a9294c26225ea8
+    foal: 5ced4ee572e501479801915b353c36e62d56a2afe9b3af9e62a9294c26225ea8
+    attachments: []
+  - index: 4
+    message-id: <BAY103-F11410841CDE610A1EFC53E2950@phx.gbl>
+    body_sha3_256: dca5294e859b47aa37270e39c8f8db90adc00daa72641be59e7b9df57f5a01ba
+    v0.10: 2bc653922a805d4ff8754aec9e9313ca5fc7ce9e4fac3c804ab49e9fc434e8d0
+    foal: 2bc653922a805d4ff8754aec9e9313ca5fc7ce9e4fac3c804ab49e9fc434e8d0
+    attachments: []
+  - index: 5
+    message-id: <BAY103-F381B373856C3F8BAEF7649E2950@phx.gbl>
+    body_sha3_256: 39ada45824094734c91d797342f34490649a2ffd91cf7b50a72ad4d6b979f188
+    v0.10: 5d6b2225c3ea3d73707420f70d7d3a1e14eeca7ec319a930a3d36c4bb63949d3
+    foal: 5d6b2225c3ea3d73707420f70d7d3a1e14eeca7ec319a930a3d36c4bb63949d3
+    attachments: []
+  - index: 6
+    message-id: <BAY103-F9B586FFD1CFE6D9112763E2950@phx.gbl>
+    body_sha3_256: 9513af448c11fe9a935cee3daae6e6b130a94f5f53840a0fff742a0707633b13
+    v0.10: 9636cfe97bac205f4babb50881b96cfd5200d2ebfdc90b69c0598b730c8d8b73
+    foal: 9636cfe97bac205f4babb50881b96cfd5200d2ebfdc90b69c0598b730c8d8b73
+    attachments: []
+  - index: 7
+    message-id: <BAY103-F802BFA93952CB192373C4E2950@phx.gbl>
+    body_sha3_256: 3cdb5195c0a06164e53d485fd82088a1a3bf36d35f4060d411d9694568dcc881
+    v0.10: 828891fc0949e439604bafa8d604713b6d1c0eb7eccb5dc691d8c6b444447de3
+    foal: 828891fc0949e439604bafa8d604713b6d1c0eb7eccb5dc691d8c6b444447de3
+    attachments: []
+  - index: 8
+    message-id: <BAY103-F40D7A4EF5AC184C9769209E2950@phx.gbl>
+    body_sha3_256: 1d09c99291191793f06aa041d6f4c32a17163ee129adb8ebf1a8275714f784cd
+    v0.10: eee54ccc869c7507b96bc29891820992688a55a2f19590f24f96ba537db490f9
+    foal: eee54ccc869c7507b96bc29891820992688a55a2f19590f24f96ba537db490f9
+    attachments: []
+  - index: 9
+    message-id: <BAY103-F1C665A56AE3A65074D38DE2950@phx.gbl>
+    body_sha3_256: 90c4f6641980ad881385a3583f14d29849d1fd8061c6e899e105b0f12d6d89c2
+    v0.10: e91d6412dc82e2f8e43198a0d994d9a68735586fa7e823594f77ec8abdd7aca3
+    foal: e91d6412dc82e2f8e43198a0d994d9a68735586fa7e823594f77ec8abdd7aca3
+    attachments: []
+  - index: 10
+    message-id: <BAY103-F192188E821DBDA96D8C790C27E0@phx.gbl>
+    body_sha3_256: 44f3ce8f1438a1de5f9e763ff0ab6fa8d2375accfe5ca589f777304f24e6f109
+    v0.10: c753a28b83d1269b8e35e3dfa83abb1d0e0b9f7bb9bc4acdbdb50ab195d2d4d2
+    foal: c753a28b83d1269b8e35e3dfa83abb1d0e0b9f7bb9bc4acdbdb50ab195d2d4d2
+    attachments: []
+  - index: 11
+    message-id: <BAY103-F40786C94EB9152F563E277ED720@phx.gbl>
+    body_sha3_256: 1312c69e645b07b003ade1c024f2631f1ac2b92f9766eac1db8dd4f50769a544
+    v0.10: 4ee07e7b4025839b579a3e656f35c46335ab127dfaa9b84fcdfb9091f0f88e37
+    foal: 4ee07e7b4025839b579a3e656f35c46335ab127dfaa9b84fcdfb9091f0f88e37
+    attachments: []

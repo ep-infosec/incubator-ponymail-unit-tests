@@ -1,0 +1,1171 @@
+From users-return-63338-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Fri Jun 02 20:26:01 2006
+Return-Path: <users-return-63338-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 91369 invoked from network); 2 Jun 2006 20:26:01 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 2 Jun 2006 20:26:01 -0000
+Received: (qmail 44032 invoked by uid 500); 2 Jun 2006 20:25:55 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 43278 invoked by uid 500); 2 Jun 2006 20:25:52 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 43267 invoked by uid 99); 2 Jun 2006 20:25:52 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 02 Jun 2006 13:25:52 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of gaodebin@hotmail.com designates 65.54.174.38 as permitted sender)
+Received: from [65.54.174.38] (HELO hotmail.com) (65.54.174.38)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 02 Jun 2006 13:25:50 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Fri, 2 Jun 2006 13:25:29 -0700
+Message-ID: <BAY103-F28070ECF509B48E8F10ECEC2910@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Fri, 02 Jun 2006 20:25:27 GMT
+X-Originating-IP: [128.2.134.32]
+X-Originating-Email: [gaodebin@hotmail.com]
+X-Sender: gaodebin@hotmail.com
+From: "DEBIN GAO" <gaodebin@hotmail.com>
+To: users@httpd.apache.org
+Date: Fri, 02 Jun 2006 16:25:27 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 02 Jun 2006 20:25:29.0977 (UTC) FILETIME=[B0FB5690:01C68682]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: [users@httpd] bug? LogFormat "%{tid}P" gives wrong tid on Windows Server 2003
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+It seems that the access log with format "%{tid}P% gives the wrong thread id 
+on my Windows Server 2003.  I have searched all the 250 threads created and 
+couldn't find the thread id reported by the log.  (It seems that it always 
+reports 820 or 824 on my machine.)  "%{pid}P" gives the correct process id 
+though.  Could anyone confirm that this is a bug before I submit it?  
+Thanks.
+
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63339-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Fri Jun 02 20:37:30 2006
+Return-Path: <users-return-63339-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 96046 invoked from network); 2 Jun 2006 20:37:30 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 2 Jun 2006 20:37:30 -0000
+Received: (qmail 60311 invoked by uid 500); 2 Jun 2006 20:37:21 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 60295 invoked by uid 500); 2 Jun 2006 20:37:21 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 60284 invoked by uid 99); 2 Jun 2006 20:37:20 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 02 Jun 2006 13:37:20 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of vsevm@hotmail.com designates 207.46.8.88 as permitted sender)
+Received: from [207.46.8.88] (HELO hotmail.com) (207.46.8.88)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 02 Jun 2006 13:37:19 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Fri, 2 Jun 2006 13:36:58 -0700
+Message-ID: <BAY117-F8A51AB1A746DB7C5C868BB4910@phx.gbl>
+Received: from 207.46.8.123 by by117fd.bay117.hotmail.msn.com with HTTP;
+	Fri, 02 Jun 2006 20:36:56 GMT
+X-Originating-IP: [216.249.131.2]
+X-Originating-Email: [vsevm@hotmail.com]
+X-Sender: vsevm@hotmail.com
+From: "johnny page" <vsevm@hotmail.com>
+To: users@httpd.apache.org
+Date: Fri, 02 Jun 2006 20:36:56 +0000
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 02 Jun 2006 20:36:58.0962 (UTC) FILETIME=[4BA61B20:01C68684]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: [users@httpd] configure for mod_jk gets error for APR_INCLUDE
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+attempting to compile the mod_jk and during the configure command
+(CC=gcc ./configure --with-java--home=/web/apache2043 
+--with-apxs=/web/apache2043/bin/apxs)
+
+I get the following error messages
+
+apxs:Error: Invalid query string `APR_INCLUDEDIR'.
+building connector for "apache-2.0"
+checking for target platform... unix
+no apache given
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating apache-1.3/Makefile
+config.status: creating apache-1.3/Makefile.apxs
+config.status: creating apache-2.0/Makefile
+config.status: creating apache-2.0/Makefile.apxs
+config.status: creating common/Makefile
+config.status: creating common/list.mk
+config.status: creating jni/Makefile
+config.status: executing depfiles commands
+
+
+
+Can someone tell me how to resolve this?   THANKS
+
+_________________________________________________________________
+FREE pop-up blocking with the new MSN Toolbar � get it now! 
+http://toolbar.msn.click-url.com/go/onm00200415ave/direct/01/
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63369-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Mon Jun 05 14:42:47 2006
+Return-Path: <users-return-63369-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 68804 invoked from network); 5 Jun 2006 14:42:47 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 5 Jun 2006 14:42:47 -0000
+Received: (qmail 77023 invoked by uid 500); 5 Jun 2006 14:42:36 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 77004 invoked by uid 500); 5 Jun 2006 14:42:36 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 76993 invoked by uid 99); 5 Jun 2006 14:42:35 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 07:42:35 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of gaodebin@hotmail.com designates 65.54.174.46 as permitted sender)
+Received: from [65.54.174.46] (HELO hotmail.com) (65.54.174.46)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 07:42:34 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 07:42:13 -0700
+Message-ID: <BAY103-F36A0C2427095C72D377474C2940@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Mon, 05 Jun 2006 14:42:10 GMT
+X-Originating-IP: [128.2.134.32]
+X-Originating-Email: [gaodebin@hotmail.com]
+X-Sender: gaodebin@hotmail.com
+In-Reply-To: <BAY103-F28070ECF509B48E8F10ECEC2910@phx.gbl>
+From: "DEBIN GAO" <gaodebin@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 10:42:10 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 05 Jun 2006 14:42:13.0666 (UTC) FILETIME=[3BDCF020:01C688AE]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: RE: [users@httpd] bug? LogFormat "%{tid}P" gives wrong tid on Windows Server 200
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Anyone?  Could it be that the "thread id" reported by apache is not the 
+thread id in my simple mind.
+
+I record the thread id by my kernel driver using PsGetCurrentThreadId(), 
+which reports a different number than the apache log "%{tid}P".  I also 
+tried a 3rd party monitoring software (Process Explorer v10.11), which 
+returns the same result as mine.  I have tried apache 2.2 on Windows Server 
+2003, Windows XP Pro and Windows XP Home, and they all have the same 
+problem.
+
+
+>From: "DEBIN GAO" <gaodebin@hotmail.com>
+>Reply-To: users@httpd.apache.org
+>To: users@httpd.apache.org
+>Subject: [users@httpd] bug? LogFormat "%{tid}P" gives wrong tid on Windows 
+>Server 2003
+>Date: Fri, 02 Jun 2006 16:25:27 -0400
+>
+>It seems that the access log with format "%{tid}P% gives the wrong thread 
+>id on my Windows Server 2003.  I have searched all the 250 threads created 
+>and couldn't find the thread id reported by the log.  (It seems that it 
+>always reports 820 or 824 on my machine.)  "%{pid}P" gives the correct 
+>process id though.  Could anyone confirm that this is a bug before I submit 
+>it?  Thanks.
+>
+>
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63383-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 06 01:20:23 2006
+Return-Path: <users-return-63383-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 48085 invoked from network); 6 Jun 2006 01:20:23 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 6 Jun 2006 01:20:23 -0000
+Received: (qmail 17088 invoked by uid 500); 6 Jun 2006 01:20:13 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 17065 invoked by uid 500); 6 Jun 2006 01:20:13 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 17053 invoked by uid 99); 6 Jun 2006 01:20:12 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:20:12 -0700
+X-ASF-Spam-Status: No, hits=2.2 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MAILTO_TO_SPAM_ADDR,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of cmoher3@hotmail.com designates 65.54.174.21 as permitted sender)
+Received: from [65.54.174.21] (HELO hotmail.com) (65.54.174.21)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:20:11 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 18:19:50 -0700
+Message-ID: <BAY103-F115CA57A21C2C56030731CE2950@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 06 Jun 2006 01:19:50 GMT
+X-Originating-IP: [69.193.241.86]
+X-Originating-Email: [cmoher3@hotmail.com]
+X-Sender: cmoher3@hotmail.com
+In-Reply-To: <20060605232058.60743.qmail@web60723.mail.yahoo.com>
+From: "Charlie Moher" <cmoher3@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 21:19:50 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 06 Jun 2006 01:19:50.0872 (UTC) FILETIME=[4EEF4D80:01C68907]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: Re: [users@httpd] registered domain name question
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Please remove me from your mailing list immediately. Thank you.
+
+
+>From: J T <baseballmagic2004@yahoo.com>
+>Reply-To: users@httpd.apache.org
+>To: users@httpd.apache.org
+>Subject: Re: [users@httpd] registered domain name question
+>Date: Mon, 5 Jun 2006 16:20:58 -0700 (PDT)
+>
+>This is what I am trying to access (including the IP)
+>http://192.168.1.100/mantis
+>
+>
+>
+>--- Bj�rge Solli <bjorge.solli@gmail.com> wrote:
+>
+> > On Tuesday 06 June 2006 00:59, J T wrote:
+> > > Hello,
+> >
+> > hi
+> >
+> > > I am new to Apache.  I have installed the apache
+> > > webserver.   I have also installed another
+> > > application named mantis on the apache webserver.
+> > I am
+> > > able to access this application (mantis)
+> > > from any computer on my network by typing the IP
+> > > address and directory into a browser.
+> > > However, I am unable to access this application
+> > from
+> > > the internet (any other computers
+> > > outside of my network).  My question is, do I have
+> > to
+> > > get a registered domain name for this to work?
+> >
+> > Are you
+> > 1) behind a firewall?
+> > 2) behind NAT?
+> >
+> > If you don't know the answers, tell us the ip.
+> >
+> > --
+> > Bj�rge Solli
+> > "Computers are like airconditioners, they don't work
+> > properly when you open
+> > windows..." (unknown)
+> >
+> >
+>---------------------------------------------------------------------
+> > The official User-To-User support forum of the
+> > Apache HTTP Server Project.
+> > See <URL:http://httpd.apache.org/userslist.html> for
+> > more info.
+> > To unsubscribe, e-mail:
+> > users-unsubscribe@httpd.apache.org
+> >    "   from the digest:
+> > users-digest-unsubscribe@httpd.apache.org
+> > For additional commands, e-mail:
+> > users-help@httpd.apache.org
+> >
+> >
+>
+>
+>__________________________________________________
+>Do You Yahoo!?
+>Tired of spam?  Yahoo! Mail has the best spam
+>protection around
+>http://mail.yahoo.com
+>
+>__________________________________________________
+>Do You Yahoo!?
+>Tired of spam?  Yahoo! Mail has the best spam protection around
+>http://mail.yahoo.com
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>    "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+
+_________________________________________________________________
+Have fun with your friends online! Look and sound great doing it. Start with 
+a video from Microsoft  
+http://www.microsoft.com/canada/home/videos/default.asp
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63385-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 06 01:21:01 2006
+Return-Path: <users-return-63385-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 48545 invoked from network); 6 Jun 2006 01:21:01 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 6 Jun 2006 01:21:01 -0000
+Received: (qmail 22940 invoked by uid 500); 6 Jun 2006 01:20:51 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 22919 invoked by uid 500); 6 Jun 2006 01:20:51 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 22908 invoked by uid 99); 6 Jun 2006 01:20:51 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:20:51 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of cmoher3@hotmail.com designates 65.54.174.11 as permitted sender)
+Received: from [65.54.174.11] (HELO hotmail.com) (65.54.174.11)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:20:49 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 18:20:28 -0700
+Message-ID: <BAY103-F11410841CDE610A1EFC53E2950@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 06 Jun 2006 01:20:28 GMT
+X-Originating-IP: [69.193.241.86]
+X-Originating-Email: [cmoher3@hotmail.com]
+X-Sender: cmoher3@hotmail.com
+In-Reply-To: <001401c688d9$d8673100$6801a8c0@BillsOffice>
+From: "Charlie Moher" <cmoher3@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 21:20:28 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 06 Jun 2006 01:20:28.0957 (UTC) FILETIME=[65A29CD0:01C68907]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: Re: [users@httpd] VirtualHost
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Please remove me from your mailing list immediately. Thank you.
+
+
+>From: "Bill Angus" <mdangus@psychtest.com>
+>Reply-To: users@httpd.apache.org
+>To: <users@httpd.apache.org>
+>Subject: Re: [users@httpd] VirtualHost
+>Date: Mon, 5 Jun 2006 12:54:21 -0700
+>
+>Even with the latest version of Apache SSL service (i.e. on port 443) and 
+>name-based-virtual-hosting, do not co-exist. At least not in the Windows 2k 
+>environment we have. Since you can have either name-based hosting on port 
+>80 - or an SSL server.... one solution is to establish 2 apache instances 
+>(one serving name-based hosting on port 80, the other serving SSL on port 
+>443).
+>
+>----- Original Message -----
+>   From: Marcos R. Cardoso
+>   To: users@httpd.apache.org
+>   Sent: Monday, June 05, 2006 12:33 PM
+>   Subject: [users@httpd] VirtualHost
+>
+>
+>   Somehow I'm not managing to make my Apache 2.0.54 work with OpenSSL
+>   0.9.8b in a Win 2003 Server 100% correctly.
+>
+>   If I include the VirtualHost directive in the http.conf the Apache
+>   doesn't start and Windows Events List gives me the following message:
+>   [warn] VirtualHost myDomain:443 overlaps with VirtualHost myDomain:443,
+>   the first has precedence, perhaps you need a NameVirtualHost directive
+>
+>   But if I use the NameVirtualHost directive (like "NameVirtualHost
+>   myDomain" or "NameVirtualHost myDomain:443"), Apache keep on not
+>   starting and the Events List gives me the message that "It's usually
+>   allowed socket address only once" (I can't put the original message
+>   since it's in Portuguse, so it's barely translated to English).
+>
+>   But the interesting part is that, even not using a virtual host, Apache
+>   starts normally and I can use https connection using the certificates
+>   that I generated temporarily, eve if it's not specified in the
+>   http.conf. I don't know if my Web Server is working in a proper way, so
+>   I would like some help on it.
+>
+>
+>   TIA,
+>
+>   --
+>   Marcos R. Cardoso
+>   Se��o de Processamento T�cnico e Automa��o
+>   Sistema Integrado de Bibliotecas
+>   FURB - Blumenau
+>   (047) 3321-0660
+>
+>
+>   ---------------------------------------------------------------------
+>   The official User-To-User support forum of the Apache HTTP Server 
+>Project.
+>   See <URL:http://httpd.apache.org/userslist.html> for more info.
+>   To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>      "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>   For additional commands, e-mail: users-help@httpd.apache.org
+>
+
+_________________________________________________________________
+Don't just Search. Find! http://search.sympatico.msn.ca/default.aspx The new 
+MSN Search! Check it out!
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63386-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 06 01:22:05 2006
+Return-Path: <users-return-63386-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 48783 invoked from network); 6 Jun 2006 01:22:05 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 6 Jun 2006 01:22:05 -0000
+Received: (qmail 26555 invoked by uid 500); 6 Jun 2006 01:21:56 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 26342 invoked by uid 500); 6 Jun 2006 01:21:55 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 26330 invoked by uid 99); 6 Jun 2006 01:21:55 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:21:55 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of cmoher3@hotmail.com designates 65.54.174.48 as permitted sender)
+Received: from [65.54.174.48] (HELO hotmail.com) (65.54.174.48)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:21:54 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 18:21:34 -0700
+Message-ID: <BAY103-F381B373856C3F8BAEF7649E2950@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 06 Jun 2006 01:21:29 GMT
+X-Originating-IP: [69.193.241.86]
+X-Originating-Email: [cmoher3@hotmail.com]
+X-Sender: cmoher3@hotmail.com
+In-Reply-To: <CF83BAA719FD2C439D25CBB1C9D1D302038B1CCC@HQ-MAIL4.ptcnet.ptc.com>
+From: "Charlie Moher" <cmoher3@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 21:21:29 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 06 Jun 2006 01:21:34.0026 (UTC) FILETIME=[8C6B5AA0:01C68907]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: RE: [users@httpd] mod_proxy_ajp (mod_rewrite) with ssl
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Please remove me from your mailing list immediately. Thank you.
+
+
+>From: "Fenlason, Josh" <jfenlason@ptc.com>
+>Reply-To: users@httpd.apache.org
+>To: <users@httpd.apache.org>
+>Subject: [users@httpd] mod_proxy_ajp (mod_rewrite) with ssl
+>Date: Mon, 5 Jun 2006 15:53:13 -0400
+>
+>I'm running into a problem with mod_proxy_ajp in Apache 2.2.2 when I
+>have ssl enabled.  The configuration below correctly passes http
+>requests to Tomcat, but all https requests are handled by Apache.  I
+>need https requests for jsps to be forwarded to Tomcat as well.  I think
+>it's probably something to do with my mod_rewrite configuration, but I'm
+>not sure what I need to change.  If anyone could give me some pointers,
+>I would be grateful.  Thanks in advance.
+>,
+>Josh.
+>
+>RewriteCond %{REQUEST_URI} /jsp-examples/(.*).jsp(.*)
+>RewriteRule ^/(.*) ajp://localhost:8010/$1 [P]
+
+_________________________________________________________________
+MSN� Calendar keeps you organized and takes the effort out of scheduling 
+get-togethers. 
+http://join.msn.com/?pgmarket=en-ca&page=byoa/prem&xAPID=1994&DI=1034&SU=http://hotmail.com/enca&HL=Market_MSNIS_Taglines 
+  Start enjoying all the benefits of MSN� Premium right now and get the 
+first two months FREE*.
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63387-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 06 01:22:32 2006
+Return-Path: <users-return-63387-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 48846 invoked from network); 6 Jun 2006 01:22:32 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 6 Jun 2006 01:22:32 -0000
+Received: (qmail 28442 invoked by uid 500); 6 Jun 2006 01:22:21 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 28424 invoked by uid 500); 6 Jun 2006 01:22:20 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 28413 invoked by uid 99); 6 Jun 2006 01:22:20 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:22:20 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of cmoher3@hotmail.com designates 65.54.174.19 as permitted sender)
+Received: from [65.54.174.19] (HELO hotmail.com) (65.54.174.19)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:22:19 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 18:21:58 -0700
+Message-ID: <BAY103-F9B586FFD1CFE6D9112763E2950@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 06 Jun 2006 01:21:57 GMT
+X-Originating-IP: [69.193.241.86]
+X-Originating-Email: [cmoher3@hotmail.com]
+X-Sender: cmoher3@hotmail.com
+In-Reply-To: <5C92F9725F58D34791C636335A4A57550702FE3E@flex1.sra.com>
+From: "Charlie Moher" <cmoher3@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 21:21:57 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 06 Jun 2006 01:21:58.0803 (UTC) FILETIME=[9B300630:01C68907]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: RE: [users@httpd] Two questions
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Please remove me from your mailing list immediately. Thank you.
+
+
+>From: "Cohen, Laurence" <Laurence_Cohen@sra.com>
+>Reply-To: users@httpd.apache.org
+>To: <users@httpd.apache.org>
+>Subject: [users@httpd] Two questions
+>Date: Mon, 5 Jun 2006 14:40:57 -0400
+>
+>Has anyone every had any trouble getting rotatelogs to work under Apache
+>version 2.0.55?
+>
+>
+>
+>Has anyone had any trouble compiling version 2.0.58 under Solaris 8
+>and/or Solaris 9.
+>
+>
+>
+>If you have had these problems and have a solution I would greatly
+>appreciate it.
+>
+>
+>
+>Thanks!
+>
+>
+>
+>Laurence H Cohen
+>
+>SRA International
+>
+>
+>
+
+_________________________________________________________________
+Take advantage of powerful junk e-mail filters built on patented Microsoft� 
+SmartScreen Technology. 
+http://join.msn.com/?pgmarket=en-ca&page=byoa/prem&xAPID=1994&DI=1034&SU=http://hotmail.com/enca&HL=Market_MSNIS_Taglines 
+  Start enjoying all the benefits of MSN� Premium right now and get the 
+first two months FREE*.
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63388-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 06 01:22:58 2006
+Return-Path: <users-return-63388-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 48883 invoked from network); 6 Jun 2006 01:22:58 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 6 Jun 2006 01:22:58 -0000
+Received: (qmail 30653 invoked by uid 500); 6 Jun 2006 01:22:47 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 30636 invoked by uid 500); 6 Jun 2006 01:22:47 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 30625 invoked by uid 99); 6 Jun 2006 01:22:47 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:22:47 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of cmoher3@hotmail.com designates 65.54.174.18 as permitted sender)
+Received: from [65.54.174.18] (HELO hotmail.com) (65.54.174.18)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:22:44 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 18:22:23 -0700
+Message-ID: <BAY103-F802BFA93952CB192373C4E2950@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 06 Jun 2006 01:22:19 GMT
+X-Originating-IP: [69.193.241.86]
+X-Originating-Email: [cmoher3@hotmail.com]
+X-Sender: cmoher3@hotmail.com
+In-Reply-To: <1F4D60B00DE5FB42AD4BB2BC06DC309203001A60@mail.shoremortgage.com>
+From: "Charlie Moher" <cmoher3@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 21:22:19 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 06 Jun 2006 01:22:23.0811 (UTC) FILETIME=[AA17F130:01C68907]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: RE: [users@httpd] Can I have "fake" URLs with mod_rewrite???
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Please remove me from your mailing list immediately. Thank you.
+
+
+>From: "Michael Avila" <mavila@shoremortgage.com>
+>Reply-To: users@httpd.apache.org
+>To: <users@httpd.apache.org>
+>Subject: RE: [users@httpd] Can I have "fake" URLs with mod_rewrite???
+>Date: Mon, 5 Jun 2006 09:59:33 -0400
+>
+>EXCELLENT! Thank you. I will use this example to learn how to use reg
+>expressions.
+>
+>Mike
+>
+>
+>
+>-----Original Message-----
+>From: jslive@gmail.com [mailto:jslive@gmail.com] On Behalf Of Joshua
+>Slive
+>Sent: Monday, June 05, 2006 9:57 AM
+>To: users@httpd.apache.org
+>Subject: Re: [users@httpd] Can I have "fake" URLs with mod_rewrite???
+>
+>On 6/5/06, Michael Avila <mavila@shoremortgage.com> wrote:
+> > www.sm.com/lo/frank becomes www.sm.com/lo.php?name=frank and
+> > www.sm.com/co/time becomes www.sm.com/co.php?name=time. Would that
+> > work with mod_rewite?
+>
+>RewriteEngine On
+>RewriteRule ^/(lo|co)/(.+) /$1\.php?name=$2
+>
+>Use the RewriteLog to debug.
+>
+>Joshua.
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server
+>Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>    "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>    "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+
+_________________________________________________________________
+Take charge with a pop-up guard built on patented Microsoft� SmartScreen 
+Technology. 
+http://join.msn.com/?pgmarket=en-ca&page=byoa/prem&xAPID=1994&DI=1034&SU=http://hotmail.com/enca&HL=Market_MSNIS_Taglines 
+  Start enjoying all the benefits of MSN� Premium right now and get the 
+first two months FREE*.
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63389-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 06 01:23:21 2006
+Return-Path: <users-return-63389-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 48925 invoked from network); 6 Jun 2006 01:23:21 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 6 Jun 2006 01:23:21 -0000
+Received: (qmail 32838 invoked by uid 500); 6 Jun 2006 01:23:11 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 32822 invoked by uid 500); 6 Jun 2006 01:23:11 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 32811 invoked by uid 99); 6 Jun 2006 01:23:10 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:23:10 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of cmoher3@hotmail.com designates 65.54.174.50 as permitted sender)
+Received: from [65.54.174.50] (HELO hotmail.com) (65.54.174.50)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:23:09 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 18:22:48 -0700
+Message-ID: <BAY103-F40D7A4EF5AC184C9769209E2950@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 06 Jun 2006 01:22:45 GMT
+X-Originating-IP: [69.193.241.86]
+X-Originating-Email: [cmoher3@hotmail.com]
+X-Sender: cmoher3@hotmail.com
+In-Reply-To: <1F4D60B00DE5FB42AD4BB2BC06DC309203001A60@mail.shoremortgage.com>
+From: "Charlie Moher" <cmoher3@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 21:22:45 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 06 Jun 2006 01:22:48.0623 (UTC) FILETIME=[B8E1F3F0:01C68907]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: RE: [users@httpd] Can I have "fake" URLs with mod_rewrite???
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Please remove me from your mailing list immediately. Thank you.
+
+
+>From: "Michael Avila" <mavila@shoremortgage.com>
+>Reply-To: users@httpd.apache.org
+>To: <users@httpd.apache.org>
+>Subject: RE: [users@httpd] Can I have "fake" URLs with mod_rewrite???
+>Date: Mon, 5 Jun 2006 09:59:33 -0400
+>
+>EXCELLENT! Thank you. I will use this example to learn how to use reg
+>expressions.
+>
+>Mike
+>
+>
+>
+>-----Original Message-----
+>From: jslive@gmail.com [mailto:jslive@gmail.com] On Behalf Of Joshua
+>Slive
+>Sent: Monday, June 05, 2006 9:57 AM
+>To: users@httpd.apache.org
+>Subject: Re: [users@httpd] Can I have "fake" URLs with mod_rewrite???
+>
+>On 6/5/06, Michael Avila <mavila@shoremortgage.com> wrote:
+> > www.sm.com/lo/frank becomes www.sm.com/lo.php?name=frank and
+> > www.sm.com/co/time becomes www.sm.com/co.php?name=time. Would that
+> > work with mod_rewite?
+>
+>RewriteEngine On
+>RewriteRule ^/(lo|co)/(.+) /$1\.php?name=$2
+>
+>Use the RewriteLog to debug.
+>
+>Joshua.
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server
+>Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>    "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>    "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+
+_________________________________________________________________
+Take charge with a pop-up guard built on patented Microsoft� SmartScreen 
+Technology  
+http://join.msn.com/?pgmarket=en-ca&page=byoa/prem&xAPID=1994&DI=1034&SU=http://hotmail.com/enca&HL=Market_MSNIS_Taglines 
+  Start enjoying all the benefits of MSN� Premium right now and get the 
+first two months FREE*.
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-63390-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 06 01:24:11 2006
+Return-Path: <users-return-63390-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 49857 invoked from network); 6 Jun 2006 01:24:11 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 6 Jun 2006 01:24:11 -0000
+Received: (qmail 37031 invoked by uid 500); 6 Jun 2006 01:24:01 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 37011 invoked by uid 500); 6 Jun 2006 01:24:01 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 37000 invoked by uid 99); 6 Jun 2006 01:24:01 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:24:01 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of cmoher3@hotmail.com designates 65.54.174.11 as permitted sender)
+Received: from [65.54.174.11] (HELO hotmail.com) (65.54.174.11)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 05 Jun 2006 18:23:59 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Mon, 5 Jun 2006 18:23:39 -0700
+Message-ID: <BAY103-F1C665A56AE3A65074D38DE2950@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 06 Jun 2006 01:23:35 GMT
+X-Originating-IP: [69.193.241.86]
+X-Originating-Email: [cmoher3@hotmail.com]
+X-Sender: cmoher3@hotmail.com
+In-Reply-To: <e498c1660606050658g74a83da5t6a48f3e69d2a4322@mail.gmail.com>
+From: "Charlie Moher" <cmoher3@hotmail.com>
+To: users@httpd.apache.org
+Date: Mon, 05 Jun 2006 21:23:35 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 06 Jun 2006 01:23:39.0378 (UTC) FILETIME=[D7228D20:01C68907]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: Re: [users@httpd] http problem
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Please remove me from your mailing list immediately. Thank you.
+
+
+>From: "Joshua Slive" <joshua@slive.ca>
+>Reply-To: users@httpd.apache.org
+>To: users@httpd.apache.org
+>Subject: Re: [users@httpd] http problem
+>Date: Mon, 5 Jun 2006 09:58:21 -0400
+>
+>On 6/4/06, simon dcunha <simon@kmun.gov.kw> wrote:
+>>
+>>Dear All
+>>
+>>i had been using apache web server for more than a year and its been
+>>working fine
+>>
+>>Red hat linux 8
+>>
+>>apache version 2.0.40-8
+>>
+>
+>This is very old.  You should strongly consider upgrading.
+>
+>
+>>
+>>but jus yesterday after a reboot apache refused to start with a error 
+>>message
+>>
+>>httpd: bad group name apache
+>>
+>>i check the password n group file and apache user was there n it was 
+>>perfect.
+>
+>In /etc/group was there a group named apache?
+>
+>Joshua.
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+
+_________________________________________________________________
+Take advantage of powerful junk e-mail filters built on patented Microsoft� 
+SmartScreen Technology. 
+http://join.msn.com/?pgmarket=en-ca&page=byoa/prem&xAPID=1994&DI=1034&SU=http://hotmail.com/enca&HL=Market_MSNIS_Taglines 
+  Start enjoying all the benefits of MSN� Premium right now and get the 
+first two months FREE*.
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-64222-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Tue Jun 27 18:35:40 2006
+Return-Path: <users-return-64222-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 86617 invoked from network); 27 Jun 2006 18:35:40 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 27 Jun 2006 18:35:40 -0000
+Received: (qmail 79091 invoked by uid 500); 27 Jun 2006 18:35:29 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 79076 invoked by uid 500); 27 Jun 2006 18:35:29 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 79065 invoked by uid 99); 27 Jun 2006 18:35:29 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Tue, 27 Jun 2006 11:35:29 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of gaodebin@hotmail.com designates 65.54.174.29 as permitted sender)
+Received: from [65.54.174.29] (HELO hotmail.com) (65.54.174.29)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Tue, 27 Jun 2006 11:35:28 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Tue, 27 Jun 2006 11:35:07 -0700
+Message-ID: <BAY103-F192188E821DBDA96D8C790C27E0@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Tue, 27 Jun 2006 18:35:04 GMT
+X-Originating-IP: [128.2.134.32]
+X-Originating-Email: [gaodebin@hotmail.com]
+X-Sender: gaodebin@hotmail.com
+From: "DEBIN GAO" <gaodebin@hotmail.com>
+To: users@httpd.apache.org
+Date: Tue, 27 Jun 2006 14:35:04 -0400
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 27 Jun 2006 18:35:07.0381 (UTC) FILETIME=[69EF2250:01C69A18]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: [users@httpd] Log file shows -ve number for %D (time spent in microseconds)
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+Hi,
+
+some entried in my log file shows a negative number for %D (time spent in 
+microsoft).  what does that mean?  Thanks.
+
+- Debin
+
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+
+From users-return-64383-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org Sat Jul 01 01:13:26 2006
+Return-Path: <users-return-64383-apmail-httpd-users-archive=httpd.apache.org@httpd.apache.org>
+Delivered-To: apmail-httpd-users-archive@www.apache.org
+Received: (qmail 91937 invoked from network); 1 Jul 2006 01:13:26 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) (209.237.227.199)
+  by minotaur.apache.org with SMTP; 1 Jul 2006 01:13:26 -0000
+Received: (qmail 41696 invoked by uid 500); 1 Jul 2006 01:13:17 -0000
+Delivered-To: apmail-httpd-users-archive@httpd.apache.org
+Received: (qmail 41670 invoked by uid 500); 1 Jul 2006 01:13:16 -0000
+Mailing-List: contact users-help@httpd.apache.org; run by ezmlm
+Precedence: bulk
+Reply-To: users@httpd.apache.org
+list-help: <mailto:users-help@httpd.apache.org>
+list-unsubscribe: <mailto:users-unsubscribe@httpd.apache.org>
+List-Post: <mailto:users@httpd.apache.org>
+List-Id: <users.httpd.apache.org>
+Delivered-To: mailing list users@httpd.apache.org
+Received: (qmail 41659 invoked by uid 99); 1 Jul 2006 01:13:16 -0000
+Received: from asf.osuosl.org (HELO asf.osuosl.org) (140.211.166.49)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 30 Jun 2006 18:13:16 -0700
+X-ASF-Spam-Status: No, hits=1.9 required=10.0
+	tests=DNS_FROM_RFC_ABUSE,DNS_FROM_RFC_POST,MSGID_FROM_MTA_HEADER,SPF_PASS
+X-Spam-Check-By: apache.org
+Received-SPF: pass (asf.osuosl.org: domain of khai_quyen@hotmail.com designates 65.54.246.206 as permitted sender)
+Received: from [65.54.246.206] (HELO bay0-omc3-s6.bay0.hotmail.com) (65.54.246.206)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Fri, 30 Jun 2006 18:13:15 -0700
+Received: from hotmail.com ([65.54.174.50]) by bay0-omc3-s6.bay0.hotmail.com with Microsoft SMTPSVC(6.0.3790.1830);
+	 Fri, 30 Jun 2006 18:12:55 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	 Fri, 30 Jun 2006 18:12:54 -0700
+Message-ID: <BAY103-F40786C94EB9152F563E277ED720@phx.gbl>
+Received: from 65.54.174.200 by by103fd.bay103.hotmail.msn.com with HTTP;
+	Sat, 01 Jul 2006 01:12:52 GMT
+X-Originating-IP: [70.141.58.2]
+X-Originating-Email: [khai_quyen@hotmail.com]
+X-Sender: khai_quyen@hotmail.com
+In-Reply-To: <FCB63FA5C6B0BA46A4F6A10096F1C3BB07C9E017@exchange01.corp.2wire.com>
+From: "Khai Doan" <khai_quyen@hotmail.com>
+To: users@httpd.apache.org
+Date: Fri, 30 Jun 2006 18:12:52 -0700
+Mime-Version: 1.0
+Content-Type: text/plain; format=flowed
+X-OriginalArrivalTime: 01 Jul 2006 01:12:54.0826 (UTC) FILETIME=[7B4778A0:01C69CAB]
+X-Virus-Checked: Checked by ClamAV on apache.org
+Subject: RE: [users@httpd] Remote log files?
+X-Spam-Rating: minotaur.apache.org 1.6.2 0/1000/N
+
+For me, I wrote a simple script send_apache_log.pl, which read apache log 
+files, print it to STDOUT, remember where it left off by writing to a file 
+in /tmp.  I install this on the servers.  Then on my other workstation, I 
+have another script collect_apache_log.pl, which run periodically via cron, 
+that invoke the remote script via passwordless-ssh.  I am not a security 
+expert, but this seems to be better than using syslog utility.
+
+Khai
+
+
+>From: "Charlie Davis" <cdavis@2wire.com>
+>Reply-To: users@httpd.apache.org
+>To: <users@httpd.apache.org>
+>Subject: [users@httpd] Remote log files?
+>Date: Thu, 29 Jun 2006 10:32:44 -0700
+>
+>Hey all,
+>Is there anyway to setup apache 1.3.6 to send its log files to a remote
+>server? Info to point me in the right direction would be fine. Google
+>has been no help. :|
+>
+>Charlie Davis
+>WebMaster
+>2Wire, Inc.
+>
+>cdavis@2Wire.com
+>www.2Wire.com
+>
+>2Wire, Inc. Company Confidential. The information contained in this
+>message may be privileged and/or confidential. If the reader of this
+>message is not the intended recipient, or an employee or agent
+>responsible for delivering this message to the intended recipient, you
+>are hereby notified that any dissemination, distribution or copying of
+>this communication is strictly prohibited. If you have received this
+>communication in error, please notify us immediately by replying to the
+>message and deleting it from your computer.
+>
+>
+>
+>---------------------------------------------------------------------
+>The official User-To-User support forum of the Apache HTTP Server Project.
+>See <URL:http://httpd.apache.org/userslist.html> for more info.
+>To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+>    "   from the digest: users-digest-unsubscribe@httpd.apache.org
+>For additional commands, e-mail: users-help@httpd.apache.org
+>
+
+
+
+---------------------------------------------------------------------
+The official User-To-User support forum of the Apache HTTP Server Project.
+See <URL:http://httpd.apache.org/userslist.html> for more info.
+To unsubscribe, e-mail: users-unsubscribe@httpd.apache.org
+   "   from the digest: users-digest-unsubscribe@httpd.apache.org
+For additional commands, e-mail: users-help@httpd.apache.org
+
+

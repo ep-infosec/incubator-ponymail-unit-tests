@@ -1,0 +1,16 @@
+args:
+  parse_html: true
+parsing:
+  corpus/nexus-html-only.mbox:
+  - index: 0
+    message-id: <977019191.23.1464076647005.JavaMail.nexus@repository-vm.apache.org>
+    body_sha3_256: d880f8256d0bdb51576a314e54670bec50546cfb0969b8f6ea3e83fddac158aa
+    attachments: []
+  - index: 1
+    message-id: <823318428.26.1464146799819.JavaMail.nexus@repository-vm.apache.org>
+    body_sha3_256: 61a834ca1a20e372cbf8d3125808e6c6a17a6bab3efc72c71a06e75bb8ed7e7d
+    attachments: []
+  - index: 2
+    message-id: <1964144158.29.1464291695849.JavaMail.nexus@repository-vm.apache.org>
+    body_sha3_256: 611914f38277b03e0343c5ea61dd4434f6fcc92cd25a88c2f7c03b278e26dbe6
+    attachments: []

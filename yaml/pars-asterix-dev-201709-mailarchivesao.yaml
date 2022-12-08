@@ -1,0 +1,223 @@
+# Alternates at index 34+35 indicate a change in format=flowed parsing in foal
+args:
+  cmd: tests/test-parsing.py --mbox corpus/asterix-dev-201709-mailarchivesao.mbox
+    --generate yaml/pars-asterix-dev-201709-mailarchivesao.yaml --root ../ponymail
+  parse_html: false
+parsing:
+  corpus/asterix-dev-201709-mailarchivesao.mbox:
+  - index: 0
+    message-id: <356EBD6C-BB26-4025-8117-3BEE1229C377@gmail.com>
+    body_sha3_256: e0fc36ec7ce3470a5ff79b98ed3265d65bc2ce3a2f1f3df5b46afd41cd1a6049
+    attachments: []
+  - index: 1
+    message-id: <E7FED432-B7DB-4F01-B4F7-D4493A72C8D1@gmail.com>
+    body_sha3_256: 0b34158de24c207ac7cf737d07f931ad484bc221a12ee08b7bcca0faa77d3379
+    attachments: []
+  - index: 2
+    message-id: <CABytAGouZybok22bXbKWakj_=o2G41U85Mns7QS3dRpMh26ZLQ@mail.gmail.com>
+    body_sha3_256: 1e7ee45c6df59624a4d35fa9a8e0f7c04755b976134b0cee7178e85ee655dc4d
+    attachments: []
+  - index: 3
+    message-id: <CABytAGrDVLCJ3LT_7yk1Nwfu0RTofrz5x17ghW4NWZhyDSo2CA@mail.gmail.com>
+    body_sha3_256: 669cc3cad3dcfbbdeb6fc888971248516980958901385161498b9ce6849970ef
+    attachments: []
+  - index: 4
+    message-id: <CAMOqS+i+VGdnZ0s15xSocUc7h7ZeQJ-+3Ra+sE6KTnSWTF4djw@mail.gmail.com>
+    body_sha3_256: 85fdf7661f6e38414a36beb12640f187005ded937b2a1bd1979bb404dc0baa31
+    attachments: []
+  - index: 5
+    message-id: <2c5b9fa3-8189-bb3a-ecc7-1574adddeeea@gmail.com>
+    body_sha3_256: 0aff15ef3e3a1c51989955547255d3fc0dfc26ddd3896a90deaa59b92c119385
+    attachments: []
+  - index: 6
+    message-id: <FA60817C-D01F-4C50-A699-42F6A44701B5@gmail.com>
+    body_sha3_256: bf738ffb8d60d7a84e7d93344b73fb9f9dfdcb5266543a59772abaa9a44c71ef
+    attachments: []
+  - index: 7
+    message-id: <351DF0B5-FBD9-457F-9E30-B3FC35F48250@apache.org>
+    body_sha3_256: c9e6dbf8fe977590c58824c2e05d4881d8291e752a90e2d6daa9c6e022b9ba1a
+    attachments: []
+  - index: 8
+    message-id: <2044600434.14.1504727438119.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: b77557e52ca24727da9008d1c5f167a4b4a635820c199a0f4fd227b2355bd100
+    attachments: []
+  - index: 9
+    message-id: <230270344.15.1504740828309.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 77ad7a2e938880b673ab8f6dce4e3853b95c5a41f441b4ed9daef57717c4c643
+    attachments: []
+  - index: 10
+    message-id: <9de0e0a5-f1a9-113c-c311-cd1fe14a7ac7@ics.uci.edu>
+    body_sha3_256: abac8312b391e029e21c03aa60d34aca93e4490c7afc7480de6a4e77a3f9d147
+    attachments: []
+  - index: 11
+    message-id: <CALjEsF7E8ayu_SsgAmT3EPxOeKtiZxF6+6k2d4xzdtUqp8OksQ@mail.gmail.com>
+    body_sha3_256: 4bd67f0b2fd78dc8457671b7199c3c5ee6dd4b7ce75612253c43b8128709ab62
+    attachments: []
+  - index: 12
+    message-id: <CAOhCj38Tcdnpxr7mZYSzZjZw8MyGhUhG8jsHqWap9Xbe+bBTJA@mail.gmail.com>
+    body_sha3_256: 40097de6c3ea83148fe46de92a355f6fa9c3e0788f33a1d93486bce7a8545d3e
+    attachments: []
+  - index: 13
+    message-id: <7B1591FA-7EC4-44CE-822F-154239CA5C1B@uci.edu>
+    body_sha3_256: f273c6b66c030e1eace1562ab26ec897c6b9a33bd28b6f3c057ac54751072c37
+    attachments: []
+  - index: 14
+    message-id: <CAE1xAns8Ve1FsqadW5BxkpDLac-jC-G9APDhjFuEtY13Rw+p=g@mail.gmail.com>
+    body_sha3_256: 5645d7a2162b5f4dadf0cf67c8b511ff600483ea9ab09ae9bd4b73e8bff893d2
+    attachments: []
+  - index: 15
+    message-id: <72AE56D5-7950-4C89-B250-C5747B78A2A6@apache.org>
+    body_sha3_256: 058a3c400b30f2396986cb58bf27cfdce2fd561008d51df2ed1889695666a258
+    attachments: []
+  - index: 16
+    message-id: <CABytAGqh2cRYWDD7vUdnnDi0XDTCo9KH9Fn+3osDKLUhSQyh2g@mail.gmail.com>
+    body_sha3_256: 0f39f58f739206f33931edf191db8862f8ae4a99c5a9035068359de0b618ea55
+    attachments: []
+  - index: 17
+    message-id: <CANQf6Do1L3FUr2p_TwOT9hjdMxLWEQZfjbJXw+JiTt=V_zyE2A@mail.gmail.com>
+    body_sha3_256: 521051b4003df8a5cbcabfe1feccea579409900bcd57b2f58c97b2f36ac76d90
+    attachments: []
+  - index: 18
+    message-id: <8dd28981-0627-3843-7c26-e5a97edfaeab@gmail.com>
+    body_sha3_256: 02cb08483b4fa473b24fed6043b6c9fd798266a5fdda8e142b02b48f07aff6a6
+    attachments: []
+  - index: 19
+    message-id: <1873196227.16.1504922177994.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 6dacd1f073adef0b534589595217dbb8d0805e594f18af241375acc75954c9f9
+    attachments: []
+  - index: 20
+    message-id: <745414043.18.1505096926880.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 2f7ea1ff6cc3f12e9427d3fc01a76d4b58f7991d69fe3b9754bb48b1a1dbfc14
+    attachments: []
+  - index: 21
+    message-id: <572295570.20.1505111495719.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 2f7ea1ff6cc3f12e9427d3fc01a76d4b58f7991d69fe3b9754bb48b1a1dbfc14
+    attachments: []
+  - index: 22
+    message-id: <1151491378.21.1505339869551.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 3f3bdc18bc62c2734a0ea514705bab0e1ea2b3cece8d41a126dd57f340dda665
+    attachments: []
+  - index: 23
+    message-id: <1909586019.22.1505439509303.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: c56cb610f9a2f8aac27c69af27041d2c884b40eb04bfc0d202fd0ace70eb50b2
+    attachments: []
+  - index: 24
+    message-id: <8DFD716E-6F5D-4064-9176-878DE9C87217@gmail.com>
+    body_sha3_256: f2be305442383487f811c85d06921b60d8308fe4e9d5ba6a8aa2e8b737728ee1
+    attachments: []
+  - index: 25
+    message-id: <AF971964-7B2A-472B-96CA-5F892AE86962@gmail.com>
+    body_sha3_256: b4cf06ccd8f4ed66e91ae2639a395e4ef719ddc6d4c05a93805006de3f1ac3c4
+    attachments: []
+  - index: 26
+    message-id: <EBB30C34-A01A-4191-8CE5-1F0EB234FE85@gmail.com>
+    body_sha3_256: 31865dc9f38aeab311955a45c0af1ea1271698d5bf00a5e9fec8b4d8ffd9a76d
+    attachments: []
+  - index: 27
+    message-id: <CAE1xAnsUUuXiFxBczvT6=oBrt7NrRZ1TKJNsz0CLd+Xaqg-SPw@mail.gmail.com>
+    body_sha3_256: 573a9424e67d8f8586557ababd409772ed257dd51f0bd44e80fe58ed5198b090
+    attachments: []
+  - index: 28
+    message-id: <8e1dbe8e-09bc-583b-3cac-b8b6d966acb2@gmail.com>
+    body_sha3_256: f46446a7ba10b0269c44aa1a2839729ef01143b31c8b47803e75187a1e1c3655
+    attachments: []
+  - index: 29
+    message-id: <CAE1xAnvxg_es=1WzrGHeJfMrxo-JdAWRQ7fZSiei5QDxD5=ixg@mail.gmail.com>
+    body_sha3_256: da36a54740fc47de626c1fae2674e017fb8da4d4faa8a4685378fd42b2d4be13
+    attachments: []
+  - index: 30
+    message-id: <810302152.23.1505857727742.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 16376537375705ff424a982868237bff011535eb02265f2dbd94c4208a4f5b31
+    attachments: []
+  - index: 31
+    message-id: <375630540.24.1506080219533.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 8543fc470e6ca8010dd458d69f53d3161ea3b542aa09adb25c439f8c598af41b
+    attachments: []
+  - index: 32
+    message-id: <34145299-0a0f-5f05-163f-f348f22a1f8b@ucr.edu>
+    body_sha3_256: fc8a48de4f8ee05856438b50cb941819ae973188160e06ea4c26a932688cdbf2
+    attachments: []
+  - index: 33
+    message-id: <1237975E-FFAE-4725-AAF9-1AC95951FD77@gmail.com>
+    body_sha3_256: 6594e5d8d3948f662f072c4dc2718296430e85e45e36610acd6274a592516e88
+    attachments: []
+  - index: 34
+    message-id: <710018FB-CE02-4B9A-BC36-A6B3A9A23CAD@apache.org>
+    body_sha3_256: a211db5af73a98c270965aab423e1c12b92efd811e72326250da5779225cae34
+    v0.10: c75e7fc37c217084a30a6f42b08c3454b8beb9fd6c43f68a46ea941ff9f41b8a
+    foal: c75e7fc37c217084a30a6f42b08c3454b8beb9fd6c43f68a46ea941ff9f41b8a
+    attachments: []
+  - index: 35
+    message-id: <6D84F738-EF80-4BA9-AEFF-47C21CA11467@apache.org>
+    body_sha3_256: 85637822a7c46012435df73c12032aebd65c5a36689a5a8e9d768faf22ddc74b
+    v0.10: 2b3349da360a1ebfba7c7e84a923812451bedb0ee6df87609d8283e4705205f9
+    foal: 2b3349da360a1ebfba7c7e84a923812451bedb0ee6df87609d8283e4705205f9
+    attachments: []
+  - index: 36
+    message-id: <E8CF05A0-0B7B-4A35-80C8-AC5C2D9F52D2@gmail.com>
+    body_sha3_256: 679eeab1cbb96b1953530ee53232c1da377c3e47f21a642dce7dd3cc39ed13d9
+    attachments: []
+  - index: 37
+    message-id: <592AE72A-9611-4FAA-BA72-3FFF155FF5CD@apache.org>
+    body_sha3_256: 5bab223e21f37b5d6e5447a019c6401146de211dd557976598e99425e3b9ca1d
+    attachments: []
+  - index: 38
+    message-id: <35DA2D0E-9330-4FFF-98C6-A767BA557884@gmail.com>
+    body_sha3_256: 48fa8ab38a1a1b3a8ecf5dfbda6b9a51878d07c646e8a77ed24781264952104b
+    attachments: []
+  - index: 39
+    message-id: <1735211819.25.1506419042212.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 8371b0fb14bd38f79bbad9fc11f676b13651e19ee08cddab390fb6d30d9c076d
+    attachments: []
+  - index: 40
+    message-id: <1056175601.26.1506499934502.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: f73fa9431125f3e8d49a4320432b2909ea22269618e8d3d9e71131a84bb8cdd4
+    attachments: []
+  - index: 41
+    message-id: <CAEGOuq0QFZRtBWnR9dm-J00a7W1GF2VikuF=wC3hJaXFReFoWA@mail.gmail.com>
+    body_sha3_256: f374380f7f18fe0de1af376b252f3ce73106e66baeb84b789e049cd00d97de5e
+    attachments: []
+  - index: 42
+    message-id: <CAEGOuq3iTPqLb9QNngh_0d5hp7ui-MOA7jc5ncOS5SB1J-AJVw@mail.gmail.com>
+    body_sha3_256: 15825ec29e90d2b08440441f69c150f069eb5c5f969d826939b6e43877910d3e
+    attachments: []
+  - index: 43
+    message-id: <CAE1xAnvp_O8WCveJ25DiSpfQGMoKhAmzxuhbpOomDu0OyjJHWQ@mail.gmail.com>
+    body_sha3_256: 05849bc8a350057cb75ef04914aa0b301a9b5c178e32f49281cf8c56504cb15d
+    attachments: []
+  - index: 44
+    message-id: <CALgBV_cpqDwtSH6A4L9v5kE2g_E-+3zGTjD+qK1orm0nPZ1iUQ@mail.gmail.com>
+    body_sha3_256: 5622693662e9a5c83de4e05eb2584455d7405add2459f69dd691523ee30fb5c3
+    attachments: []
+  - index: 45
+    message-id: <CAE1xAnt_M4D2yA1wNffGGWJAOD6s7AXr1_6cVkgcWLNLfgfmHw@mail.gmail.com>
+    body_sha3_256: 1b736a1ba38040f9ae307b01448c3b743fdba6b1af43bf7871e88509514ba7f1
+    attachments: []
+  - index: 46
+    message-id: <CAFUTFea5KqyC1PAPb6PHQ3OJZ4aq7HL7twb+L97r6JAwZRMcNQ@mail.gmail.com>
+    body_sha3_256: 39187dac644d2297a0613d9b0ad98d4cab663cc547235f4cb6703fb5d94e5a45
+    attachments: []
+  - index: 47
+    message-id: <CAE1xAnvU4_2rZuBuGYEm=Gqi4bxgLmDwMKc3iXLdy+V_MNsVEQ@mail.gmail.com>
+    body_sha3_256: 62cb1ddadbe81435e06c450511eae5aff28804103ca6dae9f03843fdfa856329
+    attachments: []
+  - index: 48
+    message-id: <CAN-bgPq1F+9Gw_s=F2vV5B7nUnKwc7ok1cFie7okpbXNOGKSXw@mail.gmail.com>
+    body_sha3_256: 74fe470fb246d27d6ed37de85a8333d01d72b749bec032c35436d964edad0194
+    attachments: []
+  - index: 49
+    message-id: <5eddb13b-9d32-da0d-79b0-c07f05e8fb7c@gmail.com>
+    body_sha3_256: 8ee495daf33aadf14c1d33501e1ca5dbbc2d565d747b58f782118e392e1592a7
+    attachments: []
+  - index: 50
+    message-id: <CAEGOuq0r-pL+4rY5j-1UV=qEPxo135BCMM8X=D5PKSbnxM_5vQ@mail.gmail.com>
+    body_sha3_256: b5f5dfa428835f106ed524293760c20300ed5a9f8ff860e7195875d08d7469bf
+    attachments: []
+  - index: 51
+    message-id: <1538859253.27.1506747931378.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 42a73c797ea39cecd7a5cfbb3f15b807fa7af61681d4ec151d68f4d11149da2d
+    attachments: []
+  - index: 52
+    message-id: <521062724.28.1506761839312.JavaMail.jenkins@unhygienix.ics.uci.edu>
+    body_sha3_256: 2f7ea1ff6cc3f12e9427d3fc01a76d4b58f7991d69fe3b9754bb48b1a1dbfc14
+    attachments: []
